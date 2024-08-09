@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 200px;
+        height: auto;
+      }
+      .container {
+        display: flex;
+        flex-direction: column; /* 確保子元素垂直排列 */
+        margin: 5px;
+      }
+      #div1 {
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        height: auto;
+      }
+      #div2 {
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        height: auto;
+      }
+      #fimg {
+        width: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>shop</h1>
+    <div class="container">
+      <div id="div1">
+        <% carouselevent.forEach((item ,index) => { %>
+        <img src="<%=carouselevent[index].eventImg%>" alt="" /><br />
+        <% }) %>
+      </div>
+      <br />
+      <div id="div2">
+        <% productClass.forEach((item ,index) => { %>
+
+        <p><%=item.productClassname%></p>
+
+        <a href="/shop/search/<%=item.productClassname%>"
+          ><img src="<%=productClass[index].productClassimg%>" alt=""
+        /></a>
+
+        <%})%>
+      </div>
+      <br />
+      <br />
+      <hr />
+      購物車
+      <form id="shopForm">
+        <label for="memberId">會員ID：</label>
+        <input type="text" id="memberId" name="memberId" /><br /><br />
+        <label for="productId">商品ID：</label>
+        <input type="text" id="productId" name="productId" /><br /><br />
+        <label for="quantity">數量：</label>
+        <input type="number" id="quantity" name="quantity" /><br /><br />
+        <button type="submit">提交</button>
+      </form>
+
+      <hr />
+      <br />
+      <br />
+      <div>
+        <img src="" alt="" />
+        <%let arr=[]%> <% product.forEach((item ,index) => { %>
+        <%a=product[index].shid%> <%arr.push(a)%> <%})%> <%let shidUnique =
+        [...new Set(arr)]; %> <% shidUnique.forEach((item ,shidindex) => { %>
+        <%firstProduct=arr.indexOf(shidindex+1)%>
+        <hr />
+        <p>第<%=shidindex+1%>項 , 在arr中第幾個: <%=firstProduct%></p>
+
+        <a href="/shop/product/<%=product[firstProduct].productId%>"
+          ><p><%=product[firstProduct].productName%></p></a
+        >
+        <img src="<%=product[firstProduct].productImg%>" alt="" />
+        <button id="btn1">加入購物車</button>
+        <p>價錢: <%=product[firstProduct].price%></p>
+        <p>
+          特價:
+          <%=(product[firstProduct].price)*(product[firstProduct].productDiscount)%>
+        </p>
+        <% product.forEach((item ,index) => { %> <%if
+        (product[index].shid==(shidindex+1)){%>
+
+        <img id="fimg" src="<%=product[index].productImg%>" alt="" />
+        <%}%> <%})%> <%})%>
+        <hr />
+        <br />
+
+        <p>同一個品牌Brand3</p>
+        <% brand.forEach(element => {%>
+        <img id="fimg" src="<%=element.productImg%>" alt="" />
+        <%});%>
+      </div>
+    </div>
+  </body>
+  <script>
+    document
+      .getElementById("shopForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault(); // 阻止表單默認提交行為
+
+        var memberId = document.getElementById("memberId").value;
+        var productId = document.getElementById("productId").value;
+        var quantity = document.getElementById("quantity").value;
+
+        fetch("/shop", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            memberId: memberId,
+            productId: productId,
+            quantity: quantity,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.message); // 在控制台上顯示伺服器返回的訊息
+          })
+          .catch((error) => {
+            console.error("錯誤:", error);
+          });
+      });
+  </script>
+</html>

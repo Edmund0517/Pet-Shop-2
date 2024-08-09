@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>篩選列</h1>
+    <form action="/shop/search/" method="POST">
+      <label for="name">名稱:</label>
+      <input type="text" id="name" name="name" />
+      <button>提交</button>
+    </form>
+    <br />
+    <br />
+    <div>
+      <p>品牌:</p>
+      <% brand.forEach((element,index) => { %>
+      <a href=""><%=element.brand%></a>
+      <% }) %>
+    </div>
+    <div>
+      <p>標籤:</p>
+      <% tag.forEach((element,index) => { %>
+      <a href=""><%=element.tagName%></a>
+      <% }) %>
+    </div>
+  </body>
+</html>

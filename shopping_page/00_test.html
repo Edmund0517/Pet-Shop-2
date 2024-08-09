@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Switcher with AJAX and Icons</title>
+    <style>
+        /* 標籤樣式 */
+        .tab {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: -4px;
+            cursor: pointer;
+            background-color: #ccc;
+            border: 1px solid #aaa;
+        }
+
+        /* 被選中的標籤樣式 */
+        .active {
+            background-color: #eee;
+            border-bottom: none;
+        }
+
+        /* 內容區域樣式 */
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #aaa;
+        }
+
+        /* 顯示被選中的內容區域 */
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <i class="tab fas fa-dog" data-tab="tab1"></i>
+        <i class="tab fas fa-cat" data-tab="tab2"></i>
+    </div>
+
+    <div id="tab1" class="tab-content">
+        <!-- Tab 1 內容將由 AJAX 加載 -->
+        123
+    </div>
+    <div id="tab2" class="tab-content">
+        <!-- Tab 2 內容將由 AJAX 加載 -->
+        456
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.tab').on('click', function() {
+                var tabId = $(this).data('tab');
+                console.log(tabId);
+                // 移除所有標籤的 active 類和所有內容區域的 active 類
+                $('.tab').removeClass('active');
+                $('.tab-content').removeClass('active');
+
+                // 添加當前點擊的標籤的 active 類
+                $(this).addClass('active');
+
+                // 使用 AJAX 加載內容
+                $.ajax({
+                    url: tabId + '.html', // 根據 data-tab 的值加載相應的 HTML 文件
+                    method: 'GET',
+                    success: function(data) {
+                        $('#' + tabId).html(data).addClass('active');
+                    },
+                    error: function() {
+                        $('#' + tabId).html('<p>內容加載失敗，請稍後再試。</p>').addClass('active');
+                    }
+                });
+            });
+
+            // 默認加載第一個頁籤
+            $('.tab').first().click();
+        });
+    </script>
+</body>
+</html>

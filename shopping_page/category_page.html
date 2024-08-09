@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category_Page</title>
+    <script src="./src/jquery-3.7.1.js"></script>
+    <!-- CSS檔案 -->
+    <link rel="stylesheet" href="./css/category_page.css">
+        <!-- W3S icon -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Bootstrap icon -->
+        <link rel="stylesheet" href="./src/bootstrap-icons-1.11.3/font/bootstrap-icons.css">
+    <!-- jQuery引用 -->
+    <script src="./src/jquery-3.7.1.js"></script>
+    <!-- JS檔案 -->
+    <script src="./JS/category.js"></script>
+    <!-- React引用 -->
+    <!-- <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
+    <!-- header引用 -->
+    <link rel="stylesheet" href="./header/header.css">
+    <script src="./header/header.js"></script>
+    <!-- footer引用 -->
+    <link rel="stylesheet" href="./footer/footer.css">
+    <script src="./footer/footer.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="homeNavBar">
+        <span class="navItemLeft" id="navHome">首頁</span>
+        <span class="navItemLeft" id="navReserve">預約服務</span>
+        <div class="logoBg">
+            <div>
+                <img id="navBarLogo" src="./image/dog.png" alt="Logo" />
+            </div>
+        </div>
+        <span class="navItemRight" id="navShop">購物</span>
+        <span class="navItemRight" id="navEdu">衛教知識</span>
+        <div class="navIcon">
+            <a href="#"><i style="color: black" class="fa-regular fa-user"></i></a>
+            <a id="btnCart" onclick="toggleDropdown()">
+                <i style="color: black" class="fa-solid fa-cart-shopping"></i>
+            </a>
+            <div id="cartDropdown" class="dropdownStyle">
+                <p id="cartSubtitle">購物明細</p>
+                <div>
+                    <a id="btnCheckBill" href="./checkBill.html">結帳</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- 底下是fontawesome icon  -->
+    <script src="https://kit.fontawesome.com/a89a722df2.js" crossorigin="anonymous"></script>
+
+
+    <!-- <div class="test">
+
+        <div class="dropdown">
+            <button id="btnCart" onclick="toggleDropdown()">
+                <i class="bi bi-cart"></i>
+            </button>
+            <div id="cartDropdown" class="dropdownStyle">
+                <p>購物明細</p>
+            </div>
+        </div>
+    </div> -->
+    <div class="contentBlock">
+        <!-- 篩選區 -->
+        <div class="filterBlock">
+            <div class="searchBlock">
+                <input id="searchBar" type="text" placeholder="輸入您想搜尋的商品">
+                <button id="searchBtn">搜尋</button>
+            </div>
+            <div class="filter">
+                <p class="filterClass">價格搜尋</p>
+                <div class="priceFilter">
+                    <input type="number"> － <input type="number">
+                </div>
+                <input type="range" class="" min="600" max="2500" step="100" 
+                aria-valuetext="2400 - 2600" aria-label="最低價" value="2400">
+                <p class="filterClass">篩選條件</p>
+                <ul>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span>狗</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span>貓</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span>幼犬</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span>成犬</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            <span>乾式飼料</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- 商品區 -->
+        <div class="pBlock">
+            <div class="pCard">
+                <div class="pImage">
+                    <img src="https://shoplineimg.com/63c12d63600b0a00b7c2ed0c/64263c38d20d626aff7b5d26/800x.webp?source_format=png" alt="">
+                    <button class="btnFavorite"><i class="fa fa-heart-o"></i></button>
+                </div>
+                <p class="pName">《野起來吃 Wild Feeding》｜犬貓冷凍生食｜冷凍配送</p>
+                <p class="pPrice">$180</p>
+                <p class="pSalePrice">$120</p>
+                <!-- Hover才會跑出來 -->
+                <div class="pFastInfo">
+                    <p class="pSizeName">規格</p>
+                    <div class="pSizes">
+                        <div class="pSizeItem selected">
+                            土雞
+                        </div>
+                        <div class="pSizeItem">
+                            鮭魚
+                        </div>
+                        <div class="pSizeItem">
+                            羊肉
+                        </div>
+                        <div class="pSizeItem">
+                            鵝肉
+                        </div>
+                    </div>
+                    <p class="pHint">約300g</p>
+                    <div class="pNumberCtrl">
+                        <div class="cutNumber">
+                            <i class="bi bi-dash"></i>
+                        </div>
+                        <input class="pNumber" type="number" name="pNumber"  min="1" max="99" value="1">
+                        <div class="plusNumber">
+                            <i class="bi bi-plus"></i>
+                        </div>
+                        <button><i class="bi bi-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pCard">
+                <div class="pImage">
+                    <img src="https://i.postimg.cc/zfSgdJnz/O-KAT.jpg" alt="">
+                    <button class="btnFavorite"><i class="fa fa-heart-o"></i></button>
+                </div>
+                <p class="pName">《美喵人生 O'KAT》冷凍乾燥生肉糧｜貓冷凍脫水乾糧</p>
+                <p class="pPrice">$899</p>
+                <p class="pSalePrice">$699</p>
+                <!-- Hover才會跑出來 -->
+                <div class="pFastInfo">
+                    <p class="pSizeName">規格</p>
+                    <div class="pSizes">
+                        <div class="pSizeItem selected">
+                            鮪魚+雞
+                        </div>
+                        <div class="pSizeItem">
+                            美味雞
+                        </div>
+                        <!-- <div class="pSizeItem">
+                            L
+                        </div> -->
+                    </div>
+                    <p class="pHint">約300g</p>
+                    <div class="pNumberCtrl">
+                        <div class="cutNumber">
+                            <i class="bi bi-dash"></i>
+                        </div>
+                        <input class="pNumber" type="number" name="pNumber"  min="1" max="99" value="1">
+                        <div class="plusNumber">
+                            <i class="bi bi-plus"></i>
+                        </div>
+                        <button><i class="bi bi-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="pCard">
+                <div class="pImage">
+                    <img src="https://shoplineimg.com/63c12d63600b0a00b7c2ed0c/6613a150d8824763f7f3a1f7/800x.webp?source_format=jpg" alt="">
+                    <button class="btnFavorite"><i class="fa fa-heart-o"></i></button>
+                </div>
+                <p class="pName">《天然密碼》鮭魚+鯡魚+曼哈頓魚｜皮膚毛髮保健｜無穀全齡貓配方｜貓顆粒乾糧</p>
+                <p class="pPrice">$270</p>
+                <p class="pSalePrice">$250</p>
+                <!-- Hover才會跑出來 -->
+                <div class="pFastInfo">
+                    <p class="pSizeName">規格</p>
+                    <div class="pSizes">
+                        <div class="pSizeItem selected">
+                            S
+                        </div>
+                        <div class="pSizeItem">
+                            M
+                        </div>
+                        <div class="pSizeItem">
+                            L
+                        </div>
+                    </div>
+                    <p class="pHint">約227g</p>
+                    <div class="pNumberCtrl">
+                        <div class="cutNumber">
+                            <i class="bi bi-dash"></i>
+                        </div>
+                        <input class="pNumber" type="number" name="pNumber"  min="1" max="99" value="1">
+                        <div class="plusNumber">
+                            <i class="bi bi-plus"></i>
+                        </div>
+                        <button><i class="bi bi-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="pCard">
+                <div class="pImage">
+                    <img src="https://shoplineimg.com/63c12d63600b0a00b7c2ed0c/66139fb176f993002021bc01/800x.webp?source_format=jpeg" alt="">
+                    <button class="btnFavorite"><i class="fa fa-heart-o"></i></button>
+                </div>
+                <p class="pName">《天然密碼》鴨肉+火雞肉｜關節保健｜無穀全齡貓配方｜貓顆粒乾糧</p>
+                <p class="pPrice">$270</p>
+                <p class="pSalePrice">$250</p>
+                <!-- Hover才會跑出來 -->
+                <div class="pFastInfo">
+                    <p class="pSizeName">規格</p>
+                    <div class="pSizes">
+                        <div class="pSizeItem selected">
+                            S
+                        </div>
+                        <div class="pSizeItem">
+                            M
+                        </div>
+                        <div class="pSizeItem">
+                            L
+                        </div>
+                    </div>
+                    <p class="pHint">約227g</p>
+                    <div class="pNumberCtrl">
+                        <div class="cutNumber">
+                            <i class="bi bi-dash"></i>
+                        </div>
+                        <input class="pNumber" type="number" name="pNumber"  min="1" max="99" value="1">
+                        <div class="plusNumber">
+                            <i class="bi bi-plus"></i>
+                        </div>
+                        <button><i class="bi bi-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="pCard">
+                <div class="pImage">
+                    <img src="https://shoplineimg.com/63c12d63600b0a00b7c2ed0c/66139cc0b7323700116a23fa/800x.webp?source_format=jpg" alt="">
+                    <button class="btnFavorite"><i class="fa fa-heart-o"></i></button>
+                </div>
+                <p class="pName">《天然密碼》雞肉+火雞肉｜消化保健｜無穀幼貓及高活動量配方｜貓顆粒乾糧</p>
+                <p class="pPrice">$270</p>
+                <p class="pSalePrice">$250</p>
+                <!-- Hover才會跑出來 -->
+                <div class="pFastInfo">
+                    <p class="pSizeName">規格</p>
+                    <div class="pSizes">
+                        <div class="pSizeItem selected">
+                            S
+                        </div>
+                        <div class="pSizeItem">
+                            M
+                        </div>
+                        <div class="pSizeItem">
+                            L
+                        </div>
+                    </div>
+                    <p class="pHint">約227g</p>
+                    <div class="pNumberCtrl">
+                        <div class="cutNumber">
+                            <i class="bi bi-dash"></i>
+                        </div>
+                        <input class="pNumber" type="number" name="pNumber"  min="1" max="99" value="1">
+                        <div class="plusNumber">
+                            <i class="bi bi-plus"></i>
+                        </div>
+                        <button><i class="bi bi-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="pCard">
+                <div class="pImage">
+                    <img src="https://shoplineimg.com/63c12d63600b0a00b7c2ed0c/65d48dad7a17e2001d5f00ae/800x.webp?source_format=png" alt="">
+                    <button class="btnFavorite"><i class="fa fa-heart-o"></i></button>
+                </div>
+                <p class="pName">《波瑞歐 BOREAL》熟齡貓(雞)｜無穀高齡貓關節護理配方｜貓顆粒乾糧</p>
+                <p class="pPrice">$1125</p>
+                <p class="pSalePrice">$999</p>
+                <!-- Hover才會跑出來 -->
+                <div class="pFastInfo">
+                    <p class="pSizeName">規格</p>
+                    <div class="pSizes">
+                        <div class="pSizeItem selected">
+                            S
+                        </div>
+                        <div class="pSizeItem">
+                            M
+                        </div>
+                        <!-- <div class="pSizeItem">
+                            L
+                        </div> -->
+                    </div>
+                    <p class="pHint">約2.26kg</p>
+                    <div class="pNumberCtrl">
+                        <div class="cutNumber">
+                            <i class="bi bi-dash"></i>
+                        </div>
+                        <input class="pNumber" type="number" name="pNumber"  min="1" max="99" value="1">
+                        <div class="plusNumber">
+                            <i class="bi bi-plus"></i>
+                        </div>
+                        <button><i class="bi bi-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="pCard">
+                <div class="pImage">
+                    <img src="https://shoplineimg.com/63c12d63600b0a00b7c2ed0c/65d48acdf10879001aea9b25/800x.webp?source_format=png" alt="">
+                    <button class="btnFavorite"><i class="fa fa-heart-o"></i></button>
+                </div>
+                <p class="pName">《波瑞歐 BOREAL》全齡貓(雞)｜無穀室內貓化毛調理配方｜貓顆粒乾糧</p>
+                <p class="pPrice">$1125</p>
+                <p class="pSalePrice">$999</p>
+                <!-- Hover才會跑出來 -->
+                <div class="pFastInfo">
+                    <p class="pSizeName">規格</p>
+                    <div class="pSizes">
+                        <div class="pSizeItem selected">
+                            S
+                        </div>
+                        <div class="pSizeItem">
+                            M
+                        </div>
+                        <!-- <div class="pSizeItem">
+                            L
+                        </div> -->
+                    </div>
+                    <p class="pHint">約2.26kg</p>
+                    <div class="pNumberCtrl">
+                        <div class="cutNumber">
+                            <i class="bi bi-dash"></i>
+                        </div>
+                        <input class="pNumber" type="number" name="pNumber"  min="1" max="99" value="1">
+                        <div class="plusNumber">
+                            <i class="bi bi-plus"></i>
+                        </div>
+                        <button><i class="bi bi-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pCard">
+                <div class="pImage">
+                    <img src="https://shoplineimg.com/63c12d63600b0a00b7c2ed0c/669dd8b00d8b2700109b157a/800x.webp?source_format=jpg" alt="">
+                    <button class="btnFavorite"><i class="fa fa-heart-o"></i></button>
+                </div>
+                <p class="pName">《藍摯 BLUE》去骨雞肉｜無穀成犬配方｜關節保護｜狗顆粒乾糧</p>
+                <p class="pPrice">$1530</p>
+                <p class="pSalePrice">$1199</p>
+                <!-- Hover才會跑出來 -->
+                <div class="pFastInfo">
+                    <p class="pSizeName">規格</p>
+                    <div class="pSizes">
+                        <div class="pSizeItem selected">
+                            S
+                        </div>
+                        <div class="pSizeItem">
+                            M
+                        </div>
+                        <div class="pSizeItem">
+                            L
+                        </div>
+                    </div>
+                    <p class="pHint">約2kg</p>
+                    <div class="pNumberCtrl">
+                        <div class="cutNumber">
+                            <i class="bi bi-dash"></i>
+                        </div>
+                        <input class="pNumber" type="number" name="pNumber"  min="1" max="99" value="1">
+                        <div class="plusNumber">
+                            <i class="bi bi-plus"></i>
+                        </div>
+                        <button><i class="bi bi-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="pCard">
+                <div class="pImage">
+                    <img src="https://shoplineimg.com/63c12d63600b0a00b7c2ed0c/669dcc5cb4f36c00163eb843/800x.webp?source_format=jpg" alt="">
+                    <button class="btnFavorite"><i class="fa fa-heart-o"></i></button>
+                </div>
+                <p class="pName">《藍摯 BLUE》去骨雞肉｜無穀幼犬配方｜護毛養膚｜狗顆粒乾糧</p>
+                <p class="pPrice">$1800</p>
+                <p class="pSalePrice">$1599</p>
+                <!-- Hover才會跑出來 -->
+                <div class="pFastInfo">
+                    <p class="pSizeName">規格</p>
+                    <div class="pSizes">
+                        <div class="pSizeItem selected">
+                            S
+                        </div>
+                        <div class="pSizeItem">
+                            M
+                        </div>
+                        <div class="pSizeItem">
+                            L
+                        </div>
+                    </div>
+                    <p class="pHint">約2kg</p>
+                    <div class="pNumberCtrl">
+                        <div class="cutNumber">
+                            <i class="bi bi-dash"></i>
+                        </div>
+                        <input class="pNumber" type="number" name="pNumber"  min="1" max="99" value="1">
+                        <div class="plusNumber">
+                            <i class="bi bi-plus"></i>
+                        </div>
+                        <button><i class="bi bi-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer" onclick="toggleFooter()">
+        <div class="footerIcon">
+            <img
+                src="https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/96/FFFFFF/external-instagram-social-media-tanah-basah-basic-outline-tanah-basah.png" />
+            <img src="https://img.icons8.com/ios/100/FFFFFF/line-me.png" />
+            <img src="https://img.icons8.com/ios-filled/100/FFFFFF/twitterx--v2.png" />
+        </div>
+        <div id="buttonMoveUp">
+            <img src="https://img.icons8.com/ios-filled/100/FFFFFF/up--v1.png" />
+
+            <p>see more</p>
+            <span>地址:台中市公益路 二段 338號 8樓之8</span>
+            <span>連絡電話 : 04-2278-5847</span>
+            <span>隱私權政策</span>
+
+            <hr />
+            <span>Copy right©2024 Furry Health寵醫網</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,306 @@
+body {
+    background-color: rgb(223, 224, 224);
+}
+
+#pageTitle {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: bisque;
+    padding: 25px;
+    background: linear-gradient(135deg, #b7d6ec, #02a549);
+    border-radius: 30px;
+    width: 100px;
+    height: fit-content;
+    /* font-size: 24px; */
+}
+
+#pageTitle h1 {
+    margin: 0;
+}
+
+#orderContent, #deliverAndPayment, #deliverInfo {
+    background-color: white;
+    border-radius: 30px;
+    width: 80%;
+    height: fit-content;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+#orderContent>div:nth-child(1) {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+}
+
+#orderTitle,
+#orderItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-bottom: 3px solid rgb(190, 189, 189);
+
+}
+
+
+
+#orderTitle div:nth-child(1),
+#orderItem div:nth-child(1) {
+    width: 35%;
+    margin: 5px;
+}
+#orderTitle div:nth-child(2),
+#orderItem div:nth-child(2) {
+    width: 25%;
+    margin: 5px;
+}
+#orderTitle div:nth-child(3),
+#orderItem div:nth-child(3) {
+    width: 10%;
+    margin: 5px;
+}
+#orderTitle div:nth-child(4),
+#orderItem div:nth-child(4) {
+    width: 10%;
+    margin: 5px;
+}
+#orderTitle div:nth-child(5),
+#orderItem div:nth-child(5) {
+    width: 10%;
+    margin: 5px;
+}
+
+#orderTitle > div, #orderItem > div {
+    text-align: center;
+}
+
+#orderTitle {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#orderItem > div:nth-child(1) {
+    display: flex;
+    justify-content: left;
+}
+
+#orderItem > div:nth-child(1) > img {
+    object-fit: contain;
+    width: 100px;
+}
+#orderItem > div:nth-child(1) > p {
+    text-align: left;
+    margin-left: 10px;
+}
+
+#orderItem > div:nth-child(5) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#btnTrash:hover {
+    cursor: pointer;
+    background-color: rgb(247, 244, 244);
+}
+
+#btnTrash {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+
+    padding: 5px;
+}
+
+#btnTrash > i {
+    font-size: 20px;
+}
+
+
+#orderTotal {
+    font-size: 28px;
+    margin: 20px;
+    padding: 20px;
+    
+    font-weight: 700;
+    display: flex;
+    justify-content: end;
+}
+#orderTotal > div {
+    width: fit-content;
+    background-color: rgb(247, 244, 244);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+#orderTotal span:nth-child(1) {
+    color: black;
+}
+#orderTotal span:nth-child(2), 
+#orderTotal span:nth-child(3) {
+    color: red;
+}
+
+#orderTotal > a {
+    text-decoration: none;
+    color: white;
+    padding: 20px;
+    margin-left: 20px;
+    border-radius: 20px;
+
+}
+
+#orderTotal > a:nth-of-type(1) {
+    text-decoration: none;
+    background: linear-gradient(to left, lightblue 50%, lightskyblue 50%) right;
+    background-size: 200%;
+    transition: .5s ease-out;
+}
+#orderTotal > a:nth-of-type(1):hover {
+    background-color: lightskyblue;
+    background-position: left;
+
+}
+#orderTotal > a:nth-of-type(2) {
+    cursor: pointer;
+    text-decoration: none;
+    background: linear-gradient(to left, #f1bc84 50%, #f38b1c 50%) right;
+    background-size: 200%;
+    transition: .5s ease-out;
+}
+#orderTotal > a:nth-of-type(2):hover {
+    /* background-color: #ebab66; */
+    background-position: left;
+}
+
+.wayTitle {
+    font-weight: 700;
+}
+
+#deliverWay, #paymentWay {
+    display: flex;
+    align-items: center;
+}
+
+#deliverWay > div, #paymentWay > div {
+    display: flex;
+    align-items: center;
+}
+
+#deliverWay > div > div, 
+#paymentWay > div > div {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+#deliverWay i, #paymentWay i {
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+#deliverWay span, #paymentWay span {
+    font-size: 16px;
+}
+
+#deliverInfo {
+    display: flex;
+}
+
+#deliverInfo > div {
+    /* margin: 20px; */
+    padding: 20px;
+    width: 50%;
+}
+
+#deliverInfo > div:nth-child(2) {
+    border-left: 1px solid gainsboro;
+}
+
+#btnCopy {
+    margin: 0;
+    /* padding: 5px; */
+    border: rgb(198, 197, 197) 2px solid;
+    /* border: none; */
+    /* box-sizing: border-box; */
+    border-radius: 10px;
+    background-color: white;
+
+    /* background-color: white; */
+    cursor: pointer;
+}
+#btnCopy:hover {
+    background-color: rgb(206, 247, 206);
+    border: green 2px solid;
+
+    
+}
+
+.infoTitle {
+    margin: 0;
+    /* padding: 0; */
+    box-sizing: border-box;
+}
+
+.infoBlockA {
+    margin-top: 18px;
+}
+.infoBlockB {
+    margin-top: 5px;
+}
+
+.inputRequired {
+    background-color: rgb(252, 222, 227);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 5px;
+}
+
+.inputNormal {
+    background-color: rgb(237, 236, 236);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 5px;
+}
+
+#finishOrder {
+    /* margin: 30px, auto; */
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 45%;
+    margin-right: 45%;
+}
+
+#finishOrder > a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 20px;
+    margin-left: 20px;
+    border-radius: 20px;
+    background: linear-gradient(to left, rgb(186, 225, 174) 50%, rgb(108, 232, 121) 50%) right;
+    background-size: 200%;
+    transition: .5s ease-out;
+}
+
+#finishOrder > a:hover {
+    background-color: rgb(108, 232, 121);
+    background-position: left;
+}
+
+/* --- */
+#deliverAndPayment,
+#deliverInfo,
+#finishOrder {
+    display: none;
+}

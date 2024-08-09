@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkBill</title>
+    <script src="./src/jquery-3.7.1.js"></script>
+    <!-- CSS檔案 -->
+    <link rel="stylesheet" href="./css/checkBill.css">
+    <!-- W3S icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap icon -->
+    <link rel="stylesheet" href="./src/bootstrap-icons-1.11.3/font/bootstrap-icons.css">
+    <!-- JS檔案 -->
+    <script src="./src/jquery-3.7.1.js"></script>
+    <script src="./JS/bootstrap.bundle.js"></script>
+    <script src="./JS/checkBill.js"></script>
+    <!-- React引用 -->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="pageTitle">
+        <h1>結帳</h1>
+    </div>
+    <div id="orderContent">
+        <div>訂單明細</div>
+        <div id="orderTitle">
+            <div>商品</div>
+            <div>規格</div>
+            <div>數量</div>
+            <div>價格</div>
+            <div>刪除</div>
+        </div>
+        <div id="orderList">
+            <div id="orderItem">
+                <div>
+                    <img src="https://shoplineimg.com/63c12d63600b0a00b7c2ed0c/664fed38becc6900199e19b7/800x.webp?source_format=jpg" alt="">
+                    <p>《美喵人生 O'KAT》冷凍乾燥生肉糧｜貓冷凍脫水乾糧</p>
+                </div>
+                <div>鮪魚+雞</div>
+                <div>1</div>
+                <div>$699</div>
+                <div>
+                    <div id="btnTrash">
+                        <i class="bi bi-trash3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="orderTotal">
+            <div>
+                <span>總計：</span>
+                <span>$</span>
+                <span id="totalPrice">699</span>
+            </div>
+            <a href="./category_page.html">再去逛逛</a>
+            <a>下一步</a>
+        </div>
+    </div>
+
+    <div id="deliverAndPayment">
+        <div class="wayTitle">配送方式</div>
+        <div id="deliverWay">
+            <div>
+                <!-- <div id="convCheck" class="">
+                    <i class="bi bi-circle"></i>
+                </div> -->
+                <label for="cDelivery">
+                <input type="radio" name="delivery" id="cDelivery">
+                <!-- <i class="bi bi-check-circle"></i> -->
+                <span>超商取貨</span>
+                </label>
+            </div>
+            <div>
+                <!-- <div id="houseCheck">
+                    <i class="bi bi-circle"></i>
+                </div> -->
+                <label for="hDelivery">
+                <input type="radio" name="delivery" id="hDelivery">
+                <span>宅配到府</span>
+                </label>
+            </div>
+        </div>
+        <div class="wayTitle">付款方式</div>
+        <div id="paymentWay">
+            <div>
+                <!-- <div id="cashPay" class="">
+                    <i class="bi bi-circle"></i>
+                </div> -->
+                <label for="cashPayment">
+                <input type="radio" name="payment" id="cashPayment">
+                <!-- <i class="bi bi-check-circle"></i> -->
+                <span>貨到付款</span>
+                </label>
+            </div>
+            <div>
+                <!-- <div id="cardPay">
+                    <i class="bi bi-circle"></i>
+                </div> -->
+                <label for="cardPayment">
+                <input type="radio" name="payment" id="cardPayment">
+                <span>信用卡付款</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div id="deliverInfo">
+        <div id="buyPerson">
+            <span>購買人資料</span>
+            <div class="infoBlockA">
+                <p class="inputRequired">姓名</p>
+                <input type="text" required>
+                <p class="inputRequired">手機號碼</p>
+                <input type="phone" required>
+                <p class="inputRequired">Email</p>
+                <input type="text" required>
+            </div>
+        </div>
+        <div id="receivePerson">
+            <div class="infoTitle">
+                <span>收件人資料</span>
+                <button id="btnCopy">複製購買人資料</button>
+            </div>
+            <div class="infoBlockB">
+                <p class="inputRequired">姓名</p>
+                <input type="text" required>
+                <p class="inputRequired">手機號碼</p>
+                <input type="phone" required>
+                <p class="inputRequired">地址</p>
+                <input type="text" required>
+                <p class="inputNormal">物流備註</p>
+                <input type="text">
+            </div>
+        </div>
+    </div>
+
+    <div id="finishOrder">
+        <a href="">送出訂單</a>
+    </div>
+
+
+</body>
+
+
+</html>

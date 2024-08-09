@@ -1,0 +1,358 @@
+/* 購物車 */
+.test {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dropdown {
+    right: 50%;
+}
+
+.dropdownStyle {
+    display: none;
+    top: 70px;
+    right: 20px;
+    position: fixed;
+    /* top: 300px; */
+    /* position: relative; */
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    padding: 5px;
+    overflow-y: scroll;
+    width: 200px;
+    height: 500px;
+}
+
+.dropdownStyle div {
+    position: relative;
+}
+
+#btnCheckBill {
+    position: absolute;
+    bottom: -400px;
+    left: 40%;
+    text-decoration: none;
+    background-color: rgb(243, 198, 115);
+    /* font-weight: 700; */
+    font-size: 16px;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#btnCheckBill:hover {
+    background-color: orange;
+    color: white;
+    transition: 0.5s;
+}
+
+#cartSubtitle {
+    font-weight: 700;
+    border-bottom: 3px solid black;
+    padding-bottom: 5px;
+}
+
+.show {display: block;}
+
+.cartProduct {
+    border-bottom: 2px solid grey;
+}
+
+/* 內容區 */
+.contentBlock {
+    display: flex;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: 120px;
+}
+
+.filterBlock {
+    /* display: ; */
+    width: 20%;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
+    /* overflow: clip; */
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+}
+
+#searchBar {
+    width: 70%;
+}
+
+#searchBtn {
+    /* width: 30px; */
+}
+
+.filter ul {
+    margin: 0;
+    padding-inline-start: 0;
+}
+
+.filter ul li {
+    margin: 0;
+    list-style-type: none;
+}
+
+.filterClass {
+    font-weight: 700;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.priceFilter {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px, 0;
+}
+
+.priceFilter p {
+    display: inline-flex;
+}
+
+.priceFilter input {
+    width: 30%;
+}
+
+.filter input[type=range] {
+    width: 100%;
+    /* box-sizing: border-box; */
+}
+
+/* --------商品區-------- */
+.pBlock {
+    border: 1px solid gray;
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px;
+    padding: 0 10%;
+    /* overflow: hidden; */
+    border-radius: 10px;
+    /* width: 70%; */
+}
+
+.pCard {
+    /* border: 1px solid black;
+    margin: 1.66%;
+    padding: 10px;
+    width: 30%;
+    font-weight: 700;
+    box-sizing: border-box;
+    min-width: 200px;
+    position: relative; */
+
+    position: relative;
+    /* 使子元素可以絕對定位 */
+    /* width: 300px; */
+    width: 30%;
+    /* min-width: 200px; */
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    font-weight: 700;
+    margin: 1.66%;
+    box-sizing: border-box;
+
+}
+
+.pImage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.pImage img {
+    box-sizing: border-box;
+    object-fit: contain;
+    max-width: 100%;
+}
+
+.pImage button {
+    width: 25%;
+    height: 25%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pImage button i {
+    font-size: 1rem;
+    color: red;
+}
+
+.pCard p {
+    margin: 10px 0;
+}
+
+.pName {
+    font-size: 20px;
+}
+
+.pPrice {
+    text-decoration: line-through;
+}
+
+.pSalePrice {
+    color: red;
+    font-size: 20px;
+}
+
+
+.pCard:hover .pFastInfo {
+    display: block;
+    -webkit-box-shadow: 0px 15px 14px 0px rgba(0, 0, 0, 0.40);
+    box-shadow: 0px 18px 14px 4px rgba(0, 0, 0, 0.40);
+}
+
+.pCard:hover {
+    /* height: auto;
+    background-color: rgb(255, 255, 255);  */
+    -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.40);
+    box-shadow: 0px 0px 14px 4px rgba(0, 0, 0, 0.40);
+}
+
+/* ----商品快速購買區---- */
+.pFastInfo {
+    /* display: none;
+    position: absolute;
+    background-color: white;
+    z-index: 1; */
+
+    display: none;
+    /* 預設隱藏 */
+    position: absolute;
+    /* 絕對定位 */
+    top: 95%;
+    /* 距離父容器底部 */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    /* border: 1px solid #ccc; */
+    border-top: none;
+    z-index: 1;
+    /* 確保在其他元素之上 */
+    padding: 10px;
+    box-sizing: border-box;
+
+}
+
+.pSizes,
+.pNumberCtrl {
+    display: flex;
+}
+
+.pSizeItem {
+    background-color: lightgray;
+    width: fit-content;
+    height: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    cursor: pointer;
+    border: 2px solid lightgray;
+}
+
+.pSizeItem.selected {
+    background-color: #878787;
+    border: 2px solid #878787;
+    color: white;
+
+}
+
+.pSizeItem:hover {
+    border: 2px solid gray;
+}
+
+.pHint {
+    font-weight: 300;
+    margin: 0;
+}
+
+.cutNumber,
+.plusNumber {
+    background-color: rgb(4, 180, 69);
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.pFastInfo,
+.pNumberCtrl {
+    /* position: relative; */
+    /* box-sizing: border-box; */
+    max-width: 100%;
+}
+
+.pNumberCtrl>input {
+    width: 20%;
+}
+
+/* chrome 消除上下箭頭 */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* firfox 消除上下箭頭 */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input[type = number] {
+    text-align: center;
+}
+
+.pNumberCtrl > button {
+    width: 30px;
+    height: 30px;
+    /* position: absolute; */
+    /* bottom: 5px;
+    right: 5px; */
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    background-color: rgb(108, 218, 148);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pNumberCtrl > button > i {
+    font-size: 1rem;
+    color: white;
+}
+
+
+/* -- */
+.pageFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    background-color: lightgoldenrodyellow;
+}

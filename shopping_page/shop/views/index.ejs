@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 200px;
+        height: auto;
+      }
+      .container {
+        display: flex;
+        flex-direction: column; /* 確保子元素垂直排列 */
+        margin: 5px;
+      }
+      #div1 {
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        height: auto;
+      }
+      #div2 {
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        height: auto;
+      }
+      #fimg {
+        width: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <%= JSON.stringify(carouselevent) %>
+
+    <!-- <h1>shop</h1>
+    <div class="container">
+      <div id="div1">
+        <% carouselevent.forEach((item ,index) => { %>
+        <img src="<%=carouselevent[index].eventImg%>" alt="" /><br />
+        <% }) %>
+      </div>
+      <br />
+      <div id="div2">
+        <% productClass.forEach((item ,index) => { %>
+        <p><%=productClass[index].productClassname%></p>
+        <a href="/shop/search"
+          ><img src="<%=productClass[index].productClassimg%>" alt=""
+        /></a>
+
+        <%})%>
+      </div>
+      <br />
+      <br />
+      <br />
+      <div>
+        <img src="" alt="" />
+        <%let arr=[]%> <% product.forEach((item ,index) => { %> <%a
+        =product[index].shid%> <%arr.push(a)%> <%})%> <%let shidUnique = [...new
+        Set(arr)]; %> <% shidUnique.forEach((item ,shidindex) => { %>
+        <%firstProduct=arr.indexOf(shidindex+1)%>
+        <hr />
+        <p>第<%=shidindex+1%>項 , 在arr中第幾個: <%=firstProduct%></p>
+        <p><%=product[firstProduct].productName%></p>
+        <img src="<%=product[firstProduct].productImg%>" alt="" />
+        <p>價錢: <%=product[firstProduct].price%></p>
+        <p>
+          特價:
+          <%=(product[firstProduct].price)*(product[firstProduct].productDiscount)%>
+        </p>
+        <% product.forEach((item ,index) => { %> <%if
+        (product[index].shid==(shidindex+1)){%>
+
+        <img id="fimg" src="<%=product[index].productImg%>" alt="" />
+        <%}%> <%})%> <%})%>
+        <hr />
+        <br />
+
+        <p>同一個品牌Brand3</p>
+        <% brand.forEach(element => {%>
+        <img id="fimg" src="<%=element.productImg%>" alt="" />
+        <%});%>
+      </div>
+    </div> -->
+  </body>
+  <script>
+    // console.log(uniqueArray); // [1, 2]
+  </script>
+</html>
