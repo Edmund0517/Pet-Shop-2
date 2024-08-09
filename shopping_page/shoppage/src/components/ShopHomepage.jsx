@@ -38,11 +38,17 @@ class ShopHomepage extends Component {
     }
 
     // 加入購物車
-    addToCart = async (productId) => {
+    addToCart = async (productId, source) => {
         console.log(productId);
-        const product = this.state.bestSellProducts.find(p => p.productId === productId);
+        let product;
+        if(source == 'bestSell') {
+            product = this.state.bestSellProducts.find(p => p.productId === productId);
+        } else if (source === 'brandSale') {
+            product = this.state.brandSaleProducts.find(p => p.productId === productId);
+        }
         const quantity = this.state.quantities[productId] || 1;
         const selectedFhid = this.state.selectedFhids[productId] || product.fhids[0];
+        const selectedFhid2 = this.state.selectedFhids2[productId] || product.fhids[0];
         console.log(product);
         console.log(quantity);
         console.log(selectedFhid);
@@ -51,7 +57,7 @@ class ShopHomepage extends Component {
             memberId: 2,
             productId: productId,
             quantity: quantity,
-            fhid: selectedFhid
+            fhid: (source === 'bestSell') ? selectedFhid : selectedFhid2
         }
         console.log( dataToServer);
 
@@ -121,7 +127,7 @@ class ShopHomepage extends Component {
                     'productImgs': product.productImgs,
                     'formats': product.formats,
                     'fhids': product.fhids,
-                    'pHint': '約180g'
+                    // 'pHint': '約180g'
                 }
             )
         });
@@ -142,7 +148,7 @@ class ShopHomepage extends Component {
                     'productImgs': product.productImgs,
                     'formats': product.formats,
                     'fhids': product.fhids,
-                    'pHint': '約180g'
+                    // 'pHint': '約180g'
                 }
             )
         });
@@ -342,7 +348,7 @@ class ShopHomepage extends Component {
                                 <img src="https://www.pet-pulse.com/petpulse_imgs/petpulse_1692935472" alt="" />
                             </a>
                             <a href="./category_page.html">
-                                <p>飼料</p>
+                                <p>貓咪飼料</p>
                                 <img src="https://www.pet-pulse.com/petpulse_imgs/petpulse_1692935472" alt="" />
                             </a>
                         </li>
@@ -427,7 +433,6 @@ class ShopHomepage extends Component {
                                             )
                                         })}
                                     </div>
-                                    <p className="pHint">{product.pHint}</p>
                                     <div className="pNumberCtrl">
                                         <div
                                             className="cutNumber"
@@ -444,7 +449,7 @@ class ShopHomepage extends Component {
                                         >
                                             <i className="bi bi-plus"></i>
                                         </div>
-                                        <button onClick={() => this.addToCart(product.productId)} >
+                                        <button onClick={() => this.addToCart(product.productId, 'bestSell')} >
                                             <i className="bi bi-cart-plus"></i>
                                         </button>
                                     </div>
@@ -499,7 +504,6 @@ class ShopHomepage extends Component {
                                                 )
                                             })}
                                         </div>
-                                        <p className="pHint">{product.pHint}</p>
                                         <div className="pNumberCtrl">
                                             <div
                                                 className="cutNumber"
@@ -516,7 +520,9 @@ class ShopHomepage extends Component {
                                             >
                                                 <i className="bi bi-plus"></i>
                                             </div>
-                                            <button><i className="bi bi-cart-plus"></i></button>
+                                            <button  onClick={() => this.addToCart(product.productId, 'brandSale')} >
+                                                <i className="bi bi-cart-plus"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

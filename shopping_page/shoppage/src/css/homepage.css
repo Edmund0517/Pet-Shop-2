@@ -522,6 +522,10 @@ li:hover a:nth-child(2) {
     max-width: 100%;
 }
 
+.pNumberCtrl {
+    margin-top: 5px;
+}
+
 .pNumberCtrl>input {
     width: 20%;
     margin-right: 5px;

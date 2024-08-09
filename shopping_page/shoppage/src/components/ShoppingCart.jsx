@@ -31,7 +31,7 @@ class ShoppingCart extends React.Component {
 
   render() {
     // console.log(11111);
-    console.log(this.props.items);
+    // console.log(this.props.items);
     return (
       <div>
         <button id='btnCart' className="btnCart" onClick={this.handleCartClick}>購物車</button>
@@ -49,6 +49,7 @@ class ShoppingCart extends React.Component {
                         <div className="imgConrainer">
                           <img src={item.productImg} alt="" className="img" />
                         </div>
+                        
                         <div>
                           {item.cartQuantity}
                         </div>
@@ -57,7 +58,7 @@ class ShoppingCart extends React.Component {
                         <div>
                           <p>商品名稱：{item.productName}</p>
                           <p>規格：{item.format}</p>
-                          <p>單價：{item.price}</p>
+                          <p>單價：{item.price * item.productDiscount}</p>
                         </div>
                         <div>
                           <p></p>
