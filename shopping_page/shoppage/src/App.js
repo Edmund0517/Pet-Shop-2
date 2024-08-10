@@ -7,7 +7,6 @@ import ShopHomepage from './components/ShopHomepage';
 import Food from './components/Food';
 import CheckBill from './components/CheckBill';
 import ShoppingCart from './components/ShoppingCart';
-// 111
 
 class App extends Component {
   render() {

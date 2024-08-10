@@ -43,25 +43,44 @@ class ShoppingCart extends React.Component {
                 {this.props.items.map((item, index) => {
                   // console.log(222);
                   console.log(item);
+                  const pPrice = item.price * item.productDiscount;
                   return (
                     <li key={index} className="cartItem">
                       <div className="itemLeft">
                         <div className="imgConrainer">
                           <img src={item.productImg} alt="" className="img" />
                         </div>
-                        
-                        <div>
-                          {item.cartQuantity}
+                        <div className="cartNumberCtrl">
+                          <div
+                            className="cartCutNumber"
+                            onClick={() => { this.handleQuantityChange() }}
+                          >
+                            <i className="bi bi-dash"></i>
+                          </div>
+                          {/* <input
+                            className="pNumber" type="number" name="pNumber" min="1" max="99"
+                            value={item.cartQuantity} readOnly /> */}
+                          <p>{item.cartQuantity}</p>
+                          <div
+                            className="cartPlusNumber"
+                            onClick={() => { this.handleQuantityChange() }}
+                          >
+                            <i className="bi bi-plus"></i>
+                          </div>
+                          
                         </div>
                       </div>
                       <div className='itemRight'>
                         <div>
                           <p>商品名稱：{item.productName}</p>
                           <p>規格：{item.format}</p>
-                          <p>單價：{item.price * item.productDiscount}</p>
+                          <p>單價：{pPrice}</p>
                         </div>
-                        <div>
-                          <p></p>
+                        <div className='totalPrice'>
+                          <p>${ pPrice * item.cartQuantity }</p>
+                          <button>
+                            <i className="bi bi-trash"></i>
+                          </button>
                         </div>
                       </div>
                     </li>
@@ -76,67 +95,5 @@ class ShoppingCart extends React.Component {
     );
   }
 }
-
-// const styles = {
-//   btnCart: {
-//     position: 'fixed'
-//   },
-//   cartPanel: {
-//     position: 'absolute',
-//     top: '50px',
-//     // right: '10px',
-//     // width: '400px',
-//     padding: '10px',
-//     border: '1px solid #ccc',
-//     backgroundColor: '#fff',
-//     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-//     display: 'flex',
-//     flexDirection: 'column',
-//     zIndex: '2',
-//     position: 'fixed',
-//     boxSizing: 'border-box'
-//   },
-//   cartTitle: {
-//     marginTop: 0,
-//     marginBottom: '10px',
-//   },
-//   itemListContainer: {
-//     width: 'fit-content',
-//     flexGrow: 1,
-//     overflowY: 'auto', // 添加垂直滾動
-//     overflowX: 'hidden', // 隱藏水平滾動
-//     maxHeight: '300px', // 設置最大高度
-//     padding: "20px"
-
-//   },
-//   itemList: {
-//     listStyleType: 'none',
-//     padding: 0,
-//     margin: 0,
-//     width: '100%'
-//   },
-//   item: {
-//     padding: '5px 0',
-//     borderBottom: '1px solid #eee',
-//     textDecoration: 'none'
-//   },
-//   imgConrainer: {
-//     width: "100px",
-//     height: "100px"
-//   },
-//   img: {
-//     objectFit: "cover",
-//     width: "100%",
-//   },
-//   checkoutButton: {
-//     marginTop: '10px',
-//     padding: '10px',
-//     backgroundColor: '#4CAF50',
-//     color: 'white',
-//     border: 'none',
-//     cursor: 'pointer',
-//     width: '100%'
-//   }
-// };
 
 export default ShoppingCart;

@@ -4,9 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'bootstrap';
 import ShoppingCart from './ShoppingCart';
 
-// ptjij ogi
-// fjgdijod
-
 // import '../css/header.css';
 // import '../css/footer.css';
 // import '../js/header';
