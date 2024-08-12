@@ -35,28 +35,28 @@ class ShopHomepage extends Component {
     }
 
     // 加入購物車
-    addToCart = async (productId, source) => {
-        console.log(productId);
+    addToCart = async (shid, source) => {
+        console.log(shid);
         let product;
-        if(source == 'bestSell') {
-            product = this.state.bestSellProducts.find(p => p.productId === productId);
+        if (source == 'bestSell') {
+            product = this.state.bestSellProducts.find(p => p.shid === shid);
         } else if (source === 'brandSale') {
-            product = this.state.brandSaleProducts.find(p => p.productId === productId);
+            product = this.state.brandSaleProducts.find(p => p.shid === shid);
         }
-        const quantity = this.state.quantities[productId] || 1;
-        const selectedFhid = this.state.selectedFhids[productId] || product.fhids[0];
-        const selectedFhid2 = this.state.selectedFhids2[productId] || product.fhids[0];
+        const quantity = this.state.quantities[shid] || 1;
+        const selectedFhid = this.state.selectedFhids[shid] || product.productIds[0];
+        const selectedFhid2 = this.state.selectedFhids2[shid] || product.productIds[0];
         console.log(product);
         console.log(quantity);
         console.log(selectedFhid);
 
         const dataToServer = {
             memberId: 2,
-            productId: productId,
+            productId: (source === 'bestSell') ? selectedFhid : selectedFhid2,
             quantity: quantity,
-            fhid: (source === 'bestSell') ? selectedFhid : selectedFhid2
+            // fhid: (source === 'bestSell') ? selectedFhid : selectedFhid2
         }
-        console.log( dataToServer);
+        console.log(dataToServer);
 
         // 加入購物車，加到資料庫
         await axios.post("http://localhost:8000/shop",
@@ -117,8 +117,8 @@ class ShopHomepage extends Component {
         var pData1 = result1.data.products.map((product, index) => {
             return (
                 {
-                    // 'shid': product.shid,
-                    'productId': product.productId,
+                    'shid': product.shid,
+                    'productIds': product.productIds,
                     'productName': product.productName,
                     'prices': product.prices,
                     'discounts': product.discounts,
@@ -139,7 +139,8 @@ class ShopHomepage extends Component {
         var pData2 = result2.data.brand.map((product, index) => {
             return (
                 {
-                    'productId': product.productId,
+                    'shid': product.shid,
+                    'productIds': product.productIds,
                     'productName': product.productName,
                     'prices': product.prices,
                     'discounts': product.discounts,
@@ -160,8 +161,8 @@ class ShopHomepage extends Component {
         // const selectedFhids = {};
 
         // this.state.bestSellProducts.forEach(product => {
-        //     selectedFormats[product.productId] = 0;
-        //     selectedFhids[product.productId] = product.fhids[0];
+        //     selectedFormats[product.shid] = 0;
+        //     selectedFhids[product.shid] = product.productIds[0];
         // });
 
         // this.setState({ selectedFormats, selectedFhids });
@@ -192,7 +193,6 @@ class ShopHomepage extends Component {
             });
         } catch (error) {
             console.error("Error loading cart items:", error);
-            // 你可能想在這裡添加一些錯誤處理邏輯
         }
     }
 
@@ -239,64 +239,131 @@ class ShopHomepage extends Component {
     }
 
     // 收藏按鈕
-    handleFavoriteClick = (productId) => {
+    handleFavoriteClick = (shid) => {
         this.setState(prevState => ({
             favoriteProducts: {
                 ...prevState.favoriteProducts,
-                [productId]: !prevState.favoriteProducts[productId]
+                [shid]: !prevState.favoriteProducts[shid]
             }
         }));
     }
 
     // 規格按鈕
     // 熱銷商品 - 規格按鈕
-    handleFormatClick = (productId, index) => {
+    handleFormatClick = (shid, index) => {
         this.setState(prevState => ({
             selectedFormats: {
                 ...prevState.selectedFormats,
-                [productId]: index
+                [shid]: index
             },
             selectedFhids: {
                 ...prevState.selectedFhids,
-                [productId]: this.state.bestSellProducts.find(p => p.productId === productId)?.fhids[index] || [0]
+                [shid]: this.state.bestSellProducts.find(p => p.shid === shid)?.productIds[index] || [0]
             }
         }));
     }
     // 品牌特價 - 規格按鈕
-    handleFormatClick2 = (productId, index) => {
+    handleFormatClick2 = (shid, index) => {
         this.setState(prevState => ({
             selectedFormats2: {
                 ...prevState.selectedFormats2,
-                [productId]: index
+                [shid]: index
             },
             selectedFhids2: {
                 ...prevState.selectedFhids2,
-                [productId]: this.state.brandSaleProducts.find(p => p.productId === productId)?.fhids[index] || [0]
+                [shid]: this.state.brandSaleProducts.find(p => p.shid === shid)?.productIds[index] || [0]
             }
         }));
     }
 
     // 數量增減按鈕
-    handleQuantityChange = (productId, change) => {
+    handleQuantityChange = (shid, change) => {
         this.setState(prevState => {
-            const currentQuantity = prevState.quantities[productId] || 1;
+            const currentQuantity = prevState.quantities[shid] || 1;
             let newQuantity = currentQuantity + change;
             newQuantity = Math.max(1, newQuantity); // 確保數量不小於1
 
             return {
                 quantities: {
                     ...prevState.quantities,
-                    [productId]: newQuantity
+                    [shid]: newQuantity
                 }
             };
         });
     }
 
+    // 購物車數量更新按鈕
+    updateItemQuantity = async (productId, change) => {
+        // 找到當前商品
+        const currentItem = this.state.cartItems.find(item => item.productId === productId);
+        if (!currentItem) {
+            console.error('找不到商品');
+            return;
+        }
+
+        // 計算新數量
+        const newQuantity = Math.max(1, currentItem.cartQuantity + change);
+
+        // 準備發送到伺服器的數據
+        const dataToServer = {
+            memberId: 2,
+            productId: productId,
+            quantity: newQuantity
+        };
+        console.log(dataToServer);
+        // 發送 PUT 請求更新資料庫
+        await axios.post('http://localhost:8000/shop/cart/update',
+            dataToServer,
+            {
+                headers: {
+                    "content-type": "application/json"
+                }
+            }
+        );
+
+        // 更新本地 state
+        this.setState(prevState => ({
+            cartItems: prevState.cartItems.map(item => {
+                if (item.productId === productId) {
+                    return { ...item, cartQuantity: newQuantity };
+                }
+                return item;
+            })
+        }));
+    }
+
+    // 購物車刪除按鈕
+    deleteCartItem = async (productId) => {
+        const dataToServer = {
+            memberId: 2,
+            productId: productId,
+        };
+        console.log(dataToServer);
+        // alert('delete??')
+        // 發送 DELETE 請求更新資料庫
+        await axios.delete('http://localhost:8000/shop', {
+            // delete需要使用 params 或 data 選項來發送數據
+            data: dataToServer,
+            headers: {
+                "content-type": "application/json"
+            }
+        });
+        console.log('item has been deleted');
+        await this.loadCartItems();
+    }
+
+
+
     render() {
 
         return (
             <div>
-                <ShoppingCart items={this.state.cartItems} />
+                <ShoppingCart
+                    items={this.state.cartItems}
+                    updateQuantity={this.updateItemQuantity}
+                    loadCartItems={this.loadCartItems}
+                    deleteItem={this.deleteCartItem}
+                />
 
                 {/* <!-- Header --> */}
                 {/* <header className="homeNavBar">
@@ -392,18 +459,18 @@ class ShopHomepage extends Component {
                 </div>
                 <div className="bestsellerProduct" >
                     {this.state.bestSellProducts.map(product => {
-                        const isFavorited = this.state.favoriteProducts[product.productId] || false;
-                        const quantity = this.state.quantities[product.productId] || 1;
-                        const selectedFormatIndex = this.state.selectedFormats[product.productId] || 0;
+                        const isFavorited = this.state.favoriteProducts[product.shid] || false;
+                        const quantity = this.state.quantities[product.shid] || 1;
+                        const selectedFormatIndex = this.state.selectedFormats[product.shid] || 0;
                         const price = product.prices[selectedFormatIndex];
                         const discount = product.discounts[selectedFormatIndex];
                         const salePrice = Math.round(price * discount);
                         return (
-                            <div className="pCard" key={product.productId}>
+                            <div className="pCard" key={product.shid}>
                                 <div className="pImage">
                                     <img src={product.productImgs[selectedFormatIndex]} alt="" />
                                     <button className={`btnFavorite ${isFavorited ? 'favorited' : ''}`}
-                                        onClick={() => { this.handleFavoriteClick(product.productId) }}>
+                                        onClick={() => { this.handleFavoriteClick(product.shid) }}>
                                         {isFavorited ? (
                                             <i
                                                 className="fa fa-heart"
@@ -425,7 +492,7 @@ class ShopHomepage extends Component {
                                                 <div
                                                     key={index}
                                                     className={`pSizeItem ${selectedFormatIndex === index ? 'selected' : ''}`}
-                                                    onClick={() => this.handleFormatClick(product.productId, index)}>
+                                                    onClick={() => this.handleFormatClick(product.shid, index)}>
                                                     {format}
                                                 </div>
                                             )
@@ -434,7 +501,7 @@ class ShopHomepage extends Component {
                                     <div className="pNumberCtrl">
                                         <div
                                             className="cutNumber"
-                                            onClick={() => { this.handleQuantityChange(product.productId, -1) }}
+                                            onClick={() => { this.handleQuantityChange(product.shid, -1) }}
                                         >
                                             <i className="bi bi-dash"></i>
                                         </div>
@@ -443,11 +510,11 @@ class ShopHomepage extends Component {
                                             value={quantity} readOnly />
                                         <div
                                             className="plusNumber"
-                                            onClick={() => { this.handleQuantityChange(product.productId, 1) }}
+                                            onClick={() => { this.handleQuantityChange(product.shid, 1) }}
                                         >
                                             <i className="bi bi-plus"></i>
                                         </div>
-                                        <button onClick={() => this.addToCart(product.productId, 'bestSell')} >
+                                        <button onClick={() => this.addToCart(product.shid, 'bestSell')} >
                                             <i className="bi bi-cart-plus"></i>
                                         </button>
                                     </div>
@@ -465,9 +532,9 @@ class ShopHomepage extends Component {
                     </p>
                     <div className="saleContainer" ref={this.containerRef}>
                         {this.state.brandSaleProducts.map((product, index) => {
-                            const isFavorited = this.state.favoriteProducts[product.productId] || false;
-                            const quantity = this.state.quantities[product.productId] || 1;
-                            const selectedFormatIndex2 = this.state.selectedFormats2[product.productId] || 0;
+                            const isFavorited = this.state.favoriteProducts[product.shid] || false;
+                            const quantity = this.state.quantities[product.shid] || 1;
+                            const selectedFormatIndex2 = this.state.selectedFormats2[product.shid] || 0;
                             // console.log(selectedFormatIndex2);
                             const price = product.prices[selectedFormatIndex2];
                             const discount = product.discounts[selectedFormatIndex2];
@@ -477,7 +544,7 @@ class ShopHomepage extends Component {
                                     <div className="pImage">
                                         <img src={product.productImgs[selectedFormatIndex2]} alt="" />
                                         <button className={`btnFavorite ${isFavorited ? 'favorited' : ''}`}
-                                            onClick={() => { this.handleFavoriteClick(product.productId) }}>
+                                            onClick={() => { this.handleFavoriteClick(product.shid) }}>
                                             {isFavorited ? (
                                                 <i
                                                     className="fa fa-heart"
@@ -499,7 +566,7 @@ class ShopHomepage extends Component {
                                                     <div
                                                         key={index}
                                                         className={`pSizeItem ${selectedFormatIndex2 === index ? 'selected' : ''}`}
-                                                        onClick={() => this.handleFormatClick2(product.productId, index)}>
+                                                        onClick={() => this.handleFormatClick2(product.shid, index)}>
                                                         {format}
                                                     </div>
                                                 )
@@ -508,7 +575,7 @@ class ShopHomepage extends Component {
                                         <div className="pNumberCtrl">
                                             <div
                                                 className="cutNumber"
-                                                onClick={() => { this.handleQuantityChange(product.productId, -1) }}
+                                                onClick={() => { this.handleQuantityChange(product.shid, -1) }}
                                             >
                                                 <i className="bi bi-dash"></i>
                                             </div>
@@ -517,11 +584,11 @@ class ShopHomepage extends Component {
                                                 value={quantity} readOnly />
                                             <div
                                                 className="plusNumber"
-                                                onClick={() => { this.handleQuantityChange(product.productId, 1) }}
+                                                onClick={() => { this.handleQuantityChange(product.shid, 1) }}
                                             >
                                                 <i className="bi bi-plus"></i>
                                             </div>
-                                            <button  onClick={() => this.addToCart(product.productId, 'brandSale')} >
+                                            <button onClick={() => this.addToCart(product.shid, 'brandSale')} >
                                                 <i className="bi bi-cart-plus"></i>
                                             </button>
                                         </div>

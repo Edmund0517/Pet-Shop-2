@@ -4,7 +4,7 @@ const cors = require('cors');
 var mysql = require("mysql");
 var app = express();
 //測試0805
-const shopRoute = require("./route/shopRoute0810"); //後面放shop路徑
+const shopRoute = require("./route/shopRoute0811"); //後面放shop路徑
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); //express使用ejs作為模板引擎
