@@ -11,8 +11,9 @@ body {
     padding: 25px;
     background: linear-gradient(135deg, #b7d6ec, #02a549);
     border-radius: 30px;
-    width: 100px;
+    width: 150px;
     height: fit-content;
+    text-align: center;
     /* font-size: 24px; */
 }
 
@@ -31,7 +32,7 @@ body {
     padding: 20px;
 }
 
-#orderContent>div:nth-child(1) {
+.orderTitle {
     font-size: 30px;
     font-weight: 700;
     text-align: center;
@@ -39,7 +40,7 @@ body {
     padding: 20px;
 }
 
-#orderTitle,
+#orderColumnTitle,
 #orderItem {
     display: flex;
     align-items: center;
@@ -51,37 +52,37 @@ body {
 
 
 
-#orderTitle div:nth-child(1),
+#orderColumnTitle div:nth-child(1),
 #orderItem div:nth-child(1) {
     width: 35%;
     margin: 5px;
 }
-#orderTitle div:nth-child(2),
+#orderColumnTitle div:nth-child(2),
 #orderItem div:nth-child(2) {
     width: 25%;
     margin: 5px;
 }
-#orderTitle div:nth-child(3),
+#orderColumnTitle div:nth-child(3),
 #orderItem div:nth-child(3) {
     width: 10%;
     margin: 5px;
 }
-#orderTitle div:nth-child(4),
+#orderColumnTitle div:nth-child(4),
 #orderItem div:nth-child(4) {
     width: 10%;
     margin: 5px;
 }
-#orderTitle div:nth-child(5),
+#orderColumnTitle div:nth-child(5),
 #orderItem div:nth-child(5) {
     width: 10%;
     margin: 5px;
 }
 
-#orderTitle > div, #orderItem > div {
+#orderColumnTitle > div, #orderItem > div {
     text-align: center;
 }
 
-#orderTitle {
+#orderColumnTitle {
     font-size: 20px;
     font-weight: 700;
 }
@@ -203,6 +204,11 @@ body {
     padding: 5px;
 }
 
+#deliverWay > div:nth-child(2),
+#paymentWay > div:nth-child(2) {
+    margin-left: 15px;
+}
+
 #deliverWay i, #paymentWay i {
     margin-top: 2px;
     font-size: 12px;
@@ -210,6 +216,7 @@ body {
 
 #deliverWay span, #paymentWay span {
     font-size: 16px;
+    margin-left: 3px;
 }
 
 #deliverInfo {
@@ -228,13 +235,15 @@ body {
 
 #btnCopy {
     margin: 0;
+    margin-left: 5px;
     /* padding: 5px; */
+
     border: rgb(198, 197, 197) 2px solid;
     /* border: none; */
     /* box-sizing: border-box; */
     border-radius: 10px;
     background-color: white;
-
+    
     /* background-color: white; */
     cursor: pointer;
 }
@@ -249,13 +258,19 @@ body {
     margin: 0;
     /* padding: 0; */
     box-sizing: border-box;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
 }
 
-.infoBlockA {
-    margin-top: 18px;
+.infoBlockA p, .infoBlockB p {
+    height: fit-content;
+    margin-top: 10px;
+    margin-bottom: 0;
 }
-.infoBlockB {
-    margin-top: 5px;
+.infoBlockA input, .infoBlockB input {
+    margin-top: 10px;
 }
 
 .inputRequired {

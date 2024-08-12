@@ -117,6 +117,7 @@ class ShopHomepage extends Component {
         var pData1 = result1.data.products.map((product, index) => {
             return (
                 {
+                    // 'shid': product.shid,
                     'productId': product.productId,
                     'productName': product.productName,
                     'prices': product.prices,
@@ -338,7 +339,7 @@ class ShopHomepage extends Component {
 
                 {/* <!-- 商品分類 OK --> */}
                 <div id="productCategory">
-                    <p className="titleName">商品類別</p>
+                    <p className="cateName">商品類別</p>
                     <ul id="categories">
                         <li>
                             <a href="./category_page.html">
@@ -346,12 +347,12 @@ class ShopHomepage extends Component {
                             </a>
                             <a href="./category_page.html">
                                 <p>貓咪飼料</p>
-                                <img src="https://www.pet-pulse.com/petpulse_imgs/petpulse_1692935472" alt="" />
+                                <img src="https://image.made-in-china.com/202f0j00VWKuQULdYlrk/Hot-Sale-Pet-Supplies-Bulk-Cat-Food-Wholesale-Catfood-2kg.webp" alt="" />
                             </a>
                         </li>
                         <li>
                             <a href="">
-                                <img src="https://img.freepik.com/premium-photo/pet-care-concept-various-pet-accessories-yellow-background_154515-5788.jpg"
+                                <img src="https://thekindpet.com/cdn/shop/articles/Why_We_Say_No_To_Nylon_Dog_Toys_And_You_Should_Too.png?v=1683121728"
                                     alt="" />
                             </a>
                             <a href="#">
@@ -362,7 +363,7 @@ class ShopHomepage extends Component {
                         </li>
                         <li>
                             <a href="">
-                                <img src="https://cdn.thewirecutter.com/wp-content/media/2024/07/petcarriers-2048px-5235-3x2-1.jpg?auto=webp&quality=75&crop=4:3,smart&width=1024"
+                                <img src="https://khpet.com/cdn/shop/files/100540973_Mod_Capsule_Pet_Carrier_and_Shelter_PDP-ATF_1_cb7673f9-3930-4523-ae27-d9b636e3f431_700x700.jpg?v=1717093839"
                                     alt="" />
                             </a>
                             <a href="#">
@@ -373,7 +374,7 @@ class ShopHomepage extends Component {
                         </li>
                         <li>
                             <a href="">
-                                <img src="https://springerpets.com/cdn/shop/files/DSC02675_f4ad954c-281b-447e-9372-c778b931688f_1024x1024.jpg?v=1699474376"
+                                <img src="https://i.etsystatic.com/11167695/r/il/3ba342/2780217509/il_570xN.2780217509_777z.jpg"
                                     alt="" />
                             </a>
                             <a href="#">
@@ -386,7 +387,7 @@ class ShopHomepage extends Component {
                 </div>
 
                 {/* <!-- 熱銷商品卡片 OK --> */}
-                <div className="blockTitle titleName">
+                <div className="blockTitle titleName bestSellBlock">
                     <p>熱銷商品</p>
                 </div>
                 <div className="bestsellerProduct" >
@@ -458,7 +459,10 @@ class ShopHomepage extends Component {
 
                 {/* <!-- 品牌特價 OK --> */}
                 <div className="brandSale">
-                    <p className="titleName">品牌限時特價</p>
+                    <p className="titleName brandSaleBlock">
+                        <span>精選品牌</span>
+                        <span>限時特價</span>
+                    </p>
                     <div className="saleContainer" ref={this.containerRef}>
                         {this.state.brandSaleProducts.map((product, index) => {
                             const isFavorited = this.state.favoriteProducts[product.productId] || false;
