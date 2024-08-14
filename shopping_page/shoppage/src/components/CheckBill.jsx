@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import withRouter from 'react-router-dom';
 
 import '../css/checkBill.css'
 
@@ -53,6 +54,11 @@ class CheckBill extends Component {
         } catch (error) {
             console.error("Error loading cart items:", error);
         }
+    }
+
+    // 再去逛逛的按鈕
+    backToShop = () => {
+        this.props.history.goBack();
     }
 
     // 按下一步顯示資訊且隱藏下一步按鈕
@@ -236,7 +242,7 @@ class CheckBill extends Component {
                         </div>
                         {!this.state.showAdditionalInfo && (
                             <>
-                                <a href="./category_page.html">再去逛逛</a>
+                                <a onClick={this.backToShop}>再去逛逛</a>
                                 <a onClick={this.showAdditionalInfo}>下一步</a>
                             </>
                         )}

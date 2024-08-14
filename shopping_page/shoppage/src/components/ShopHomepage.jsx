@@ -3,12 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'bootstrap';
 import ShoppingCart from './ShoppingCart';
-
-// import '../css/header.css';
-// import '../css/footer.css';
-// import '../js/header';
-// import '../js/footer';
-// import '../js/bootstrap.bundle'
+import Footer from './Footer';
 
 import '../css/homepage.css';
 import '../css/homepage_carousel.css';
@@ -358,32 +353,13 @@ class ShopHomepage extends Component {
 
         return (
             <div>
+                {/* <Header /> */}
                 <ShoppingCart
                     items={this.state.cartItems}
                     updateQuantity={this.updateItemQuantity}
                     loadCartItems={this.loadCartItems}
                     deleteItem={this.deleteCartItem}
                 />
-
-                {/* <!-- Header --> */}
-                {/* <header className="homeNavBar">
-                    <span className="navItemLeft" id="navHome">首頁</span>
-                    <span className="navItemLeft" id="navReserve">預約服務</span>
-                    <div className="logoBg">
-                        <div>
-                            <img id="navBarLogo" src="./image/dog.png" alt="Logo" />
-                        </div>
-                    </div>
-                    <span className="navItemRight" id="navShop" href="./homepage.html">購物</span>
-                    <span className="navItemRight" id="navEdu">衛教知識</span>
-                    <div className="navIcon">
-                        <a href="#"><i style={{color: 'black'}} className="fa-regular fa-user"></i></a>
-                        <a href="#"><i style={{color: 'black'}} className="fa-solid fa-cart-shopping"></i></a>
-                    </div>
-                </header> */}
-                {/* <!-- 底下是fontawesome icon  --> */}
-                {/* <script src="https://kit.fontawesome.com/a89a722df2.js" crossOrigin="anonymous"></script> */}
-
                 {/* <!-- 輪播圖 OK --> */}
                 <div id="eventSlide" className="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"
                     ref={this.carouselRef} onMouseEnter={this.carouselMouseEnter} onMouseLeave={this.carouselMouseLeave}>
@@ -599,26 +575,7 @@ class ShopHomepage extends Component {
                     </div>
                 </div>
 
-                {/* <!-- footer --> */}
-                {/* <div className="footer" onClick="toggleFooter()">
-                    <div className="footerIcon">
-                        <img
-                            src="https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/96/FFFFFF/external-instagram-social-media-tanah-basah-basic-outline-tanah-basah.png" />
-                        <img src="https://img.icons8.com/ios/100/FFFFFF/line-me.png" />
-                        <img src="https://img.icons8.com/ios-filled/100/FFFFFF/twitterx--v2.png" />
-                    </div>
-                    <div id="buttonMoveUp">
-                        <img src="https://img.icons8.com/ios-filled/100/FFFFFF/up--v1.png" />
-
-                        <p>see more</p>
-                        <span>地址:台中市公益路 二段 338號 8樓之8</span>
-                        <span>連絡電話 : 04-2278-5847</span>
-                        <span>隱私權政策</span>
-
-                        <hr />
-                        <span>Copy right©2024 Furry Health寵醫網</span>
-                    </div>
-                </div> */}
+                <Footer />
             </div>
         );
     }

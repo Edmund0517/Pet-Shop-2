@@ -3,7 +3,8 @@
     /* -- */
     display: flex;
     justify-content: center;
-    top: 50px;
+    top: 150px;
+    margin-bottom: 20px;
   }
   
   .carousel.pointer-event {

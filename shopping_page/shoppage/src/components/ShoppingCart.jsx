@@ -1,6 +1,7 @@
 import React from 'react';
 // import axios from 'axios';
 import '../css/shoppingCart.css';
+import Header from './Header';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
@@ -15,25 +16,52 @@ class ShoppingCart extends React.Component {
     quantities: {}
   }
 
-  handleCartClick = async () => {
-    await this.props.loadCartItems();
+  handleCartClick = async (event) => {
+    // 阻止事件冒泡，這樣點擊購物車時不會觸發 handleOutsideClick
+    event.stopPropagation();
 
-    if (!this.state.showCart) {
-      document.addEventListener('mousedown', this.handleOutsideClick);
-    } else {
+    if (this.state.showCart) {
+      // 如果購物車已經顯示，則關閉它
+      this.setState({ showCart: false });
       document.removeEventListener('mousedown', this.handleOutsideClick);
+    } else {
+      // 如果購物車未顯示，則加載購物車項目並顯示
+      await this.props.loadCartItems();
+
+      this.setState({ showCart: true }, () => {
+        // 在 setState 的回調中添加事件監聽器，確保狀態已更新
+        document.addEventListener('mousedown', this.handleOutsideClick);
+      });
     }
-    this.setState(prevState => ({
-      showCart: !prevState.showCart
-    }));
+
+
+    // await this.props.loadCartItems();
+
+    // if (!this.state.showCart) {
+    //   document.addEventListener('mousedown', this.handleOutsideClick);
+    // } else {
+    //   document.removeEventListener('mousedown', this.handleOutsideClick);
+    // }
+    // this.setState(prevState => ({
+    //   showCart: !prevState.showCart
+    // }));
 
   }
 
   handleOutsideClick = (event) => {
-    if (this.cartRef && !this.cartRef.current.contains(event.target)) {
+    // 確保點擊的不是購物車圖標本身
+    if (this.cartRef && !this.cartRef.current.contains(event.target) &&
+      !event.target.closest('.btnCart')) { // 假設購物車圖標有 'cart-icon' 類
       this.setState({ showCart: false });
       document.removeEventListener('mousedown', this.handleOutsideClick);
     }
+
+
+
+    // if (this.cartRef && !this.cartRef.current.contains(event.target)) {
+    //   this.setState({ showCart: false });
+    //   document.removeEventListener('mousedown', this.handleOutsideClick);
+    // }
   }
 
 
@@ -59,7 +87,8 @@ class ShoppingCart extends React.Component {
     // console.log(this.props.items);
     return (
       <div>
-        <button id='btnCart' className="btnCart" onClick={this.handleCartClick}>購物車</button>
+        <Header cartClick={this.handleCartClick} />
+        {/* <button id='btnCart' className="btnCart" onClick={this.handleCartClick}>購物車</button> */}
         {this.state.showCart && (
           <div ref={this.cartRef} className="cartPanel">
             <h2 className="cartTitle">購物清單</h2>

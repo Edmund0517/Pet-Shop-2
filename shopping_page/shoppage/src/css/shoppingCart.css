@@ -1,13 +1,13 @@
 .btnCart {
-    position: fixed;
-    z-index: 2;
+    /* position: fixed;
+    z-index: 2; */
 }
 
 .cartPanel {
     position: absolute;
     top: 50px;
-    /* right: 10px; */
-    /* width: 400px; */
+    right: 0;
+    /* width: 800px; */
     padding: 10px;
     border: 1px solid #ccc;
     background-color: #fff;
