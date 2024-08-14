@@ -65,6 +65,9 @@ class ShoppingCart extends React.Component {
             <h2 className="cartTitle">購物清單</h2>
             <div className="itemListContainer">
               <ul className="itemList">
+                {this.props.items.length === 0 && (
+                  <li className='cartItem emptyCart'><p>還沒選購任何商品唷！</p></li>
+                )}
                 {this.props.items.map((item, index) => {
                   // console.log(222);
                   // console.log(item);

@@ -98,7 +98,7 @@ class ShopHomepage extends Component {
         // 輪播
         if (this.carouselRef.current) {
             this.carousel = new Carousel(this.carouselRef.current, {
-                interval: 3000,
+                interval: 2000,
                 pause: 'hover'
             });
         }

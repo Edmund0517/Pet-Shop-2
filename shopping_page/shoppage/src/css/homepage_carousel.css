@@ -14,6 +14,8 @@
     position: relative;
     width: 80%;
     overflow: hidden;
+    border-radius: 50px;
+
   }
   .carousel-inner::after {
     display: block;

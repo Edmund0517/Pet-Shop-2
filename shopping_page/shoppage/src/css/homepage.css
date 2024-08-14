@@ -1,6 +1,13 @@
+@font-face {
+    font-family: "all-text";
+    src: url('../字體/jf2.2四分糖.otf');
+}
+
 body {
-    background-image: url("../image/bgImage.png");
+    /* background-image: url("../image/bgImage.png"); */
     background-repeat: round;
+    font-family: "all-text", Arial, sans-serif;
+	scroll-behavior: smooth;
 }
 
 /* 類別 */
@@ -120,30 +127,43 @@ body {
 
 #productCategory ul li:nth-child(1) {
     border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%;
-    border: 5px solid transparent;
+    /* border: 5px solid transparent; */
     overflow: hidden;
 
 }
 
 #productCategory ul li:nth-child(2) {
     border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%;
-    border: 5px solid transparent;
+    /* border: 5px solid transparent; */
     overflow: hidden;
 
 }
 
 #productCategory ul li:nth-child(3) {
     border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%;
-    border: 5px solid transparent;
+    /* border: 5px solid transparent; */
     overflow: hidden;
 
 }
 
 #productCategory ul li:nth-child(4) {
     border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%;
-    border: 5px solid transparent;
+    /* border: 5px solid transparent; */
     overflow: hidden;
 
+}
+
+#productCategory ul li:nth-child(1) a img {
+    border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%;
+}
+#productCategory ul li:nth-child(2) a img {
+    border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%;
+}
+#productCategory ul li:nth-child(3) a img {
+    border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%;
+}
+#productCategory ul li:nth-child(4) a img {
+    border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%;
 }
 
 #productCategory ul li a {
@@ -193,7 +213,7 @@ body {
     height: 100%;
     /* clip-path: circle(50% at 50% 50%); */
     object-fit: cover;
-    border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%;
+    /* border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%; */
     border: 5px solid transparent;
     overflow: hidden;
 

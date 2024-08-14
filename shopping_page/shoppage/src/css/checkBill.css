@@ -19,9 +19,12 @@ body {
 
 #pageTitle h1 {
     margin: 0;
+    font-weight: 700;
 }
 
-#orderContent, #deliverAndPayment, #deliverInfo {
+#orderContent,
+#deliverAndPayment,
+#deliverInfo {
     background-color: white;
     border-radius: 30px;
     width: 80%;
@@ -32,6 +35,54 @@ body {
     padding: 20px;
 }
 
+.rotateIcon {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    left: 95%;
+    background: gainsboro;
+    border: none;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.rotateIcon:hover {
+    background-color: gray;
+    color: white;
+    /* text-shadow: 0px 1px 0px white, 0px 1px 0px white, 0px 1px 0px white, 0px 1px 0px white; */
+}
+
+.rotateIcon i {
+    font-weight: 900;
+    text-shadow: 0px 0px 1px #000000, 0px 0px 1px #000000, 0px 0px 1px #000000, 0px 0px 1px #000000;
+}
+
+.rotateIcon:hover i {
+    font-weight: 900;
+    text-shadow: 0px 0px 1px white, 0px 0px 1px white, 0px 0px 1px white, 0px 0px 1px white;
+}
+
+.rotateIcon.expanded {
+    transform: rotate(180deg);
+    /* transition: transform 0.3s ease-in-out; */
+}
+
+.orderContentContainer {
+    height: 100%;
+    overflow: hidden;
+}
+
+.orderContent {
+    overflow: hidden;
+    margin-top: -10%;
+    transition: all 1s;
+}
+
+.orderContent.expanded {
+    margin-top: 0;
+}
+
+
 .orderTitle {
     font-size: 30px;
     font-weight: 700;
@@ -41,44 +92,48 @@ body {
 }
 
 #orderColumnTitle,
-#orderItem {
+.orderItem {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
     border-bottom: 3px solid rgb(190, 189, 189);
-
 }
 
 
 
 #orderColumnTitle div:nth-child(1),
-#orderItem div:nth-child(1) {
+.orderItem div:nth-child(1) {
     width: 35%;
     margin: 5px;
 }
+
 #orderColumnTitle div:nth-child(2),
-#orderItem div:nth-child(2) {
+.orderItem div:nth-child(2) {
     width: 25%;
     margin: 5px;
 }
+
 #orderColumnTitle div:nth-child(3),
-#orderItem div:nth-child(3) {
-    width: 10%;
-    margin: 5px;
-}
-#orderColumnTitle div:nth-child(4),
-#orderItem div:nth-child(4) {
-    width: 10%;
-    margin: 5px;
-}
-#orderColumnTitle div:nth-child(5),
-#orderItem div:nth-child(5) {
+.orderItem div:nth-child(3) {
     width: 10%;
     margin: 5px;
 }
 
-#orderColumnTitle > div, #orderItem > div {
+#orderColumnTitle div:nth-child(4),
+.orderItem div:nth-child(4) {
+    width: 10%;
+    margin: 5px;
+}
+
+#orderColumnTitle div:nth-child(5),
+.orderItem div:nth-child(5) {
+    width: 10%;
+    margin: 5px;
+}
+
+#orderColumnTitle>div,
+.orderItem>div {
     text-align: center;
 }
 
@@ -87,25 +142,29 @@ body {
     font-weight: 700;
 }
 
-#orderItem > div:nth-child(1) {
+.orderItem>div:nth-child(1) {
     display: flex;
     justify-content: left;
+    align-items: center;
 }
 
-#orderItem > div:nth-child(1) > img {
+.orderItem>div:nth-child(1)>img {
     object-fit: contain;
     width: 100px;
 }
-#orderItem > div:nth-child(1) > p {
+
+.orderItem>div:nth-child(1)>p {
     text-align: left;
     margin-left: 10px;
+    margin-bottom: 0;
 }
 
-#orderItem > div:nth-child(5) {
+.orderItem>div:nth-child(5) {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 #btnTrash:hover {
     cursor: pointer;
     background-color: rgb(247, 244, 244);
@@ -122,7 +181,7 @@ body {
     padding: 5px;
 }
 
-#btnTrash > i {
+#btnTrash>i {
     font-size: 20px;
 }
 
@@ -131,12 +190,13 @@ body {
     font-size: 28px;
     margin: 20px;
     padding: 20px;
-    
+
     font-weight: 700;
     display: flex;
     justify-content: end;
 }
-#orderTotal > div {
+
+#orderTotal>div {
     width: fit-content;
     background-color: rgb(247, 244, 244);
     padding: 20px;
@@ -146,12 +206,13 @@ body {
 #orderTotal span:nth-child(1) {
     color: black;
 }
-#orderTotal span:nth-child(2), 
+
+#orderTotal span:nth-child(2),
 #orderTotal span:nth-child(3) {
     color: red;
 }
 
-#orderTotal > a {
+#orderTotal>a {
     text-decoration: none;
     color: white;
     padding: 20px;
@@ -160,61 +221,81 @@ body {
 
 }
 
-#orderTotal > a:nth-of-type(1) {
+#orderTotal>a:nth-of-type(1) {
     text-decoration: none;
     background: linear-gradient(to left, lightblue 50%, lightskyblue 50%) right;
     background-size: 200%;
     transition: .5s ease-out;
 }
-#orderTotal > a:nth-of-type(1):hover {
+
+#orderTotal>a:nth-of-type(1):hover {
     background-color: lightskyblue;
     background-position: left;
 
 }
-#orderTotal > a:nth-of-type(2) {
+
+#orderTotal>a:nth-of-type(2) {
     cursor: pointer;
     text-decoration: none;
     background: linear-gradient(to left, #f1bc84 50%, #f38b1c 50%) right;
     background-size: 200%;
     transition: .5s ease-out;
 }
-#orderTotal > a:nth-of-type(2):hover {
+
+#orderTotal>a:nth-of-type(2):hover {
     /* background-color: #ebab66; */
     background-position: left;
 }
 
-.wayTitle {
-    font-weight: 700;
+.wayTitle span {
+    font-size: 14px;
+    color: red;
 }
 
-#deliverWay, #paymentWay {
+.wayTitle img {
+    height: 100%;
+}
+
+#deliverAndPayment {
+    padding: 40px;
+}
+
+#deliverWay,
+#paymentWay {
+    display: flex;
+    align-items: center;
+    cursor: default;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    user-select: none;
+}
+
+#deliverWay>div,
+#paymentWay>div {
     display: flex;
     align-items: center;
 }
 
-#deliverWay > div, #paymentWay > div {
-    display: flex;
-    align-items: center;
-}
-
-#deliverWay > div > div, 
-#paymentWay > div > div {
+#deliverWay>div>div,
+#paymentWay>div>div {
     display: flex;
     align-items: center;
     padding: 5px;
 }
 
-#deliverWay > div:nth-child(2),
-#paymentWay > div:nth-child(2) {
+#deliverWay>div:nth-child(2),
+#paymentWay>div:nth-child(2) {
     margin-left: 15px;
 }
 
-#deliverWay i, #paymentWay i {
-    margin-top: 2px;
-    font-size: 12px;
+#deliverWay i,
+#paymentWay i {
+    /* margin-top: 2px; */
+    font-size: 16px;
 }
 
-#deliverWay span, #paymentWay span {
+#deliverWay span,
+#paymentWay span {
     font-size: 16px;
     margin-left: 3px;
 }
@@ -223,13 +304,13 @@ body {
     display: flex;
 }
 
-#deliverInfo > div {
+#deliverInfo>div {
     /* margin: 20px; */
     padding: 20px;
     width: 50%;
 }
 
-#deliverInfo > div:nth-child(2) {
+#deliverInfo>div:nth-child(2) {
     border-left: 1px solid gainsboro;
 }
 
@@ -243,18 +324,20 @@ body {
     /* box-sizing: border-box; */
     border-radius: 10px;
     background-color: white;
-    
+
     /* background-color: white; */
     cursor: pointer;
 }
+
 #btnCopy:hover {
     background-color: rgb(206, 247, 206);
     border: green 2px solid;
 
-    
+
 }
 
-.infoTitle {
+.infoTitle,
+.wayTitle {
     margin: 0;
     /* padding: 0; */
     box-sizing: border-box;
@@ -262,15 +345,25 @@ body {
     display: flex;
     align-items: center;
     font-weight: 700;
+    font-size: 20px;
 }
 
-.infoBlockA p, .infoBlockB p {
+.infoBlockA p,
+.infoBlockB p {
     height: fit-content;
     margin-top: 10px;
     margin-bottom: 0;
 }
-.infoBlockA input, .infoBlockB input {
+
+.infoBlockA input,
+.infoBlockB input {
     margin-top: 10px;
+}
+
+.infoBlockA span,
+.infoBlockB span {
+    color: red;
+    margin-left: 5px;
 }
 
 .inputRequired {
@@ -295,7 +388,7 @@ body {
     margin-right: 45%;
 }
 
-#finishOrder > a {
+#finishOrder>a {
     text-decoration: none;
     color: black;
     font-size: 20px;
@@ -303,14 +396,15 @@ body {
     padding: 20px;
     margin-left: 20px;
     border-radius: 20px;
-    background: linear-gradient(to left, rgb(186, 225, 174) 50%, rgb(108, 232, 121) 50%) right;
+    background: linear-gradient(to left, rgb(159, 210, 221) 50%, rgb(0, 137, 167) 50%) right;
     background-size: 200%;
     transition: .5s ease-out;
 }
 
-#finishOrder > a:hover {
-    background-color: rgb(108, 232, 121);
+#finishOrder>a:hover {
+    background-color: rgb(0, 137, 167);
     background-position: left;
+    color: white;
 }
 
 /* --- */
