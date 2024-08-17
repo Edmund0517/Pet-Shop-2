@@ -23,13 +23,17 @@ class Food extends Component {
     tags: [],
 
     brandFilterItems: [],
+    tagFilterItems: [],
 
-    filterItems: {
+    filterBrandItems: {
+      // dog: false,
+    },
+    filterTagItems: {
       // dog: false,
     }
   }
 
-  componentDidMount = async() => {
+  componentDidMount = async () => {
     // 載入商品區
     await this.loadFoodProducts();
     await this.loadFilterItems();
@@ -70,20 +74,39 @@ class Food extends Component {
         }
       )
     })
-    
+
     var filterItemsBrandData = result.data.brands.reduce((acc, brandItem) => {
-      acc[brandItem.brand] = false;
+      acc[brandItem.bhId] = false;
       return acc;
     }, {});
 
     console.log(filterItemsBrandData);
-    
+
     console.log(filterBrandData);
-    newState.filterItems = filterItemsBrandData;
+
+    var filterTagData = result.data.tags.map((tagItem) => {
+      return (
+        {
+          'tagName': tagItem.tagName,
+          'tagId': tagItem.productTagId
+        }
+      )
+    })
+
+    var filterItemsTagData = result.data.tags.reduce((acc, tagItem) => {
+      acc[tagItem.productTagId] = false;
+      return acc;
+    }, {});
+
+    newState.filterBrandItems = filterItemsBrandData;
+    newState.filterTagItems = filterItemsTagData;
     newState.brandFilterItems = filterBrandData;
+    newState.tagFilterItems = filterTagData;
+    console.log(newState.filterBrandItems);
+    console.log(newState.filterTagItems);
     this.setState(newState);
 
-    
+
 
 
     // var filterData = result.data.tags.map((Item, index) => {
@@ -97,27 +120,85 @@ class Food extends Component {
     // this.setState(newState);
   }
 
-  handleFilterChange = (filterName) => {
-    // console.log(filterName);
-    
-    
-    this.setState(prevState => ({
-      filterItems: {
-        ...prevState.filterItems,
-        [filterName]: !prevState.filterItems[filterName]
-      }
-      
-    }));
-    console.log(this.state.filterItems);
+  handleFilterChange = async (filterId, type) => {
+    if (type === 'brand') {
+      await this.setState(prevState => ({
+        filterBrandItems: {
+          ...prevState.filterBrandItems,
+          [filterId]: !prevState.filterBrandItems[filterId]
+        }
+      }));
+    } else if (type === 'tag') {
+      await this.setState(prevState => ({
+        filterTagItems: {
+          ...prevState.filterTagItems,
+          [filterId]: !prevState.filterTagItems[filterId]
+        }
+      }));
+    }
+
+    const selectedBrands = Object.keys(this.state.filterBrandItems)
+      .filter(key => this.state.filterBrandItems[key])
+      .map(String);
+
+    const selectedTags = Object.keys(this.state.filterTagItems)
+      .filter(key => this.state.filterTagItems[key])
+      .map(String);
+
+    console.log(typeof selectedBrands[0]);
+
+
+    const dataToServer = {
+      'brands': selectedBrands,
+      'tags': selectedTags
+    }
+    console.log(dataToServer);
+    // 發送請求到後端
+    // this.fetchFilteredProducts(dataToServer);
+    try {
+      const response = await axios.post('http://localhost:8000/shop/products/filter', dataToServer);
+      console.log('Filtered products:', response.data.products);
+      var newState = { ...this.state };
+      var pData = response.data.products.map((product, index) => {
+        return (
+          {
+            'shid': product.shid,
+            'productIds': product.productIds,
+            'productName': product.productName,
+            'prices': product.prices,
+            'discounts': product.discounts,
+            'productImgs': product.productImgs,
+            'formats': product.formats,
+            'fhids': product.fhids,
+          }
+        )
+      });
+      newState.foodProducts = pData;
+      this.setState(newState);
+    } catch (error) {
+      console.error('Error filtering products:', error);
+    }
   };
 
-  filterProducts = () => {
-    return this.state.foodProducts.filter(product => {
-      if (this.state.filterItems.dog) {
-        return product.productName.includes('狗') || product.productName.includes('犬');
-      }
-      return true; // 如果沒有選中任何過濾器，返回所有產品
-    });
+  fetchFilteredProducts = async (dataToServer) => {
+    // try {
+    const response = await axios.post('http://localhost:8000/shop/products/filter',
+      JSON.stringify(dataToServer),
+      {
+        headers: {
+          "content-type": "application/json"
+        }
+      },
+    );
+
+    // if (!response.ok) {
+    //   throw new Error('Network response was not ok');
+    // }
+    console.log(response.data);
+    this.setState({ foodProducts: response.data });
+    // } catch (error) {
+    //   console.error('Error fetching filtered products:', error);
+    // }
   };
 
   // 收藏按鈕
@@ -283,7 +364,7 @@ class Food extends Component {
   }
 
   render() {
-    const filteredProducts = this.filterProducts();
+    // const filteredProducts = this.filterProducts();
     return (
       <>
         <ShoppingCart
@@ -308,16 +389,30 @@ class Food extends Component {
                 aria-valuetext="2400 - 2600" aria-label="最低價" value="5000" />
               <p className="filterTitle">篩選條件</p>
               <ul>
-                {this.state.brandFilterItems.map((brandItem, index) => {
+                {this.state.brandFilterItems.map((brandItem) => {
                   return (
-                    <li className='tagItem' key={index}>
+                    <li className='tagItem' key={brandItem.brandId}>
                       <label>
                         <input
                           type="checkbox"
-                          checked={this.state.filterItems[brandItem.brandName]}
-                          onChange={() => this.handleFilterChange(brandItem.brandName)}
+                          checked={this.state.filterBrandItems[brandItem.brandId]}
+                          onChange={() => this.handleFilterChange(brandItem.brandId, 'brand')}
                         />
                         <span>{brandItem.brandName}</span>
+                      </label>
+                    </li>
+                  )
+                })}
+                {this.state.tagFilterItems.map((tagItem) => {
+                  return (
+                    <li className='tagItem' key={tagItem.tagId}>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={this.state.filterTagItems[tagItem.tagId]}
+                          onChange={() => this.handleFilterChange(tagItem.tagId, 'tag')}
+                        />
+                        <span>{tagItem.tagName}</span>
                       </label>
                     </li>
                   )
