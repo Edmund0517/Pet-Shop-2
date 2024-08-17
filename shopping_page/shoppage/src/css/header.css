@@ -179,6 +179,13 @@ a {
 	border: none;
 }
 
+.navIcon button span {
+	position: relative;
+	top: 10px;
+	margin: 0 10px;
+	font-size: 28px;
+	cursor: pointer;
+}
 .navIcon button i {
 	position: relative;
 	top: 10px;

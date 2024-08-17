@@ -3,16 +3,13 @@ var express = require("express");
 const cors = require('cors');
 var mysql = require("mysql");
 var app = express();
-const router = express.Router();
 //測試0805
 const shopRoute = require("./route/shopRoute0811"); //後面放shop路徑
-const productRoute = require("./route/productRoute"); //後面放shop路徑
-// const healthRoute = require("./route/healthRoute"); //後面放healthRoute路徑
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); //express使用ejs作為模板引擎
 app.set("view engine", "ejs");
 app.use(cors());
-
 
 var conn = mysql.createConnection({
   host: "127.0.0.1",
@@ -28,8 +25,8 @@ conn.connect(function (err) {
   }
   console.log("connected");
 });
-//新增商品篩選路由
-app.use("/shop", shopRoute, productRoute);
+
+app.use("/shop", shopRoute);
 app.get("*", (req, res) => {
   res.status(404).send("錯誤頁面喔。。。");
 });

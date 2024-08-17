@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import "../css/header.css";
 
-function Header({cartClick}) {
+function Header({ cartClick }) {
 	const [isNavVisible, setNavVisible] = useState(false);
 	// const navigate = useNavigate();
 
@@ -42,19 +42,23 @@ function Header({cartClick}) {
 			<span
 				className="navItemLeft"
 				id="navHome"
-				onClick={("/")}
+
+			// onClick={("/")}
 			>
 				首頁
 			</span>
 			<span
 				className="navItemLeft"
 				id="navReserve"
-				onClick={("/reservation")}
+
+			// onClick={("/reservation")}
 			>
 				預約服務
 			</span>
 			<div className="logoBg">
-				<div onClick={("/")}>
+				<div
+				// onClick={("/")}
+				>
 					<img
 						id="navBarLogo"
 						src="/dog.png"
@@ -72,13 +76,17 @@ function Header({cartClick}) {
 			<span
 				className="navItemRight"
 				id="navEdu"
-				onClick={("/health")}
+			// 
+			// onClick={("/health")}
 			>
 				衛教知識
 			</span>
 			<div className="navIcon">
-				<button onClick={("/user")}>
-					<i style={{ color: "black" }} className="fa-regular fa-user"></i>
+				<button
+				// onClick={("/user")}
+				>
+					{/* <i style={{ color: "black" }} className="fa-regular fa-user"></i> */}
+					<span>吳康人</span>
 				</button>
 				<button onClick={cartClick} className="btnCart">
 					<i

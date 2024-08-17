@@ -124,7 +124,7 @@ class ShopHomepage extends Component {
                 }
             )
         });
-        console.log(pData1);
+        // console.log(pData1);
         newState1.bestSellProducts = pData1;
         this.setState(newState1);
 
@@ -231,6 +231,10 @@ class ShopHomepage extends Component {
         if (this.carousel) {
             this.carousel.cycle();
         }
+    }
+
+    goToFood = () => {
+        window.location = '/shop/Food'
     }
 
     // 收藏按鈕
@@ -385,42 +389,42 @@ class ShopHomepage extends Component {
                     <p className="cateName">商品類別</p>
                     <ul id="categories">
                         <li>
-                            <a href="./category_page.html">
+                            <a onClick={this.goToFood}>
                                 <img src="https://www.pet-pulse.com/petpulse_imgs/petpulse_1692935472" alt="" />
                             </a>
-                            <a href="./category_page.html">
-                                <p>貓咪飼料</p>
+                            <a onClick={this.goToFood}>
+                                <p>飼料</p>
                                 <img src="https://image.made-in-china.com/202f0j00VWKuQULdYlrk/Hot-Sale-Pet-Supplies-Bulk-Cat-Food-Wholesale-Catfood-2kg.webp" alt="" />
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a>
                                 <img src="https://thekindpet.com/cdn/shop/articles/Why_We_Say_No_To_Nylon_Dog_Toys_And_You_Should_Too.png?v=1683121728"
                                     alt="" />
                             </a>
-                            <a href="#">
+                            <a>
                                 <p>玩具</p>
                                 <img src="https://img.freepik.com/premium-photo/pet-care-concept-various-pet-accessories-yellow-background_154515-5788.jpg"
                                     alt="" />
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a>
                                 <img src="https://khpet.com/cdn/shop/files/100540973_Mod_Capsule_Pet_Carrier_and_Shelter_PDP-ATF_1_cb7673f9-3930-4523-ae27-d9b636e3f431_700x700.jpg?v=1717093839"
                                     alt="" />
                             </a>
-                            <a href="#">
+                            <a>
                                 <p>寵物攜帶用品</p>
                                 <img src="https://cdn.thewirecutter.com/wp-content/media/2024/07/petcarriers-2048px-5235-3x2-1.jpg?auto=webp&quality=75&crop=4:3,smart&width=1024"
                                     alt="" />
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a>
                                 <img src="https://i.etsystatic.com/11167695/r/il/3ba342/2780217509/il_570xN.2780217509_777z.jpg"
                                     alt="" />
                             </a>
-                            <a href="#">
+                            <a>
                                 <p>牽繩</p>
                                 <img src="https://springerpets.com/cdn/shop/files/DSC02675_f4ad954c-281b-447e-9372-c778b931688f_1024x1024.jpg?v=1699474376"
                                     alt="" />

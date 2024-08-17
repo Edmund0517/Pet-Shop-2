@@ -8,6 +8,7 @@ body {
     background-repeat: round;
     font-family: "all-text", Arial, sans-serif;
 	scroll-behavior: smooth;
+    background-color: rgb(222, 243, 247);
 }
 
 /* 類別 */
@@ -182,6 +183,7 @@ body {
     box-sizing: border-box;
     /* overflow: hidden; */
     padding: 0;
+    cursor: pointer;
 
     /* 動畫 */
     position: absolute;
@@ -431,6 +433,13 @@ body {
 
 .bestsellerProduct .pSizeItem:hover {
     border: 2px solid gray;
+}
+
+.bestsellerProduct .pSizeItem.selected {
+    background-color: #878787;
+    border: 2px solid #878787;
+    color: white;
+
 }
 
 .bestsellerProduct .pHint {
