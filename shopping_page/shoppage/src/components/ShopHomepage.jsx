@@ -26,7 +26,11 @@ class ShopHomepage extends Component {
         startX: 0,
         scrollLeft: 0,
         memberId: 2,
-        cartItems: []
+        cartItems: [],
+
+        // 提示加入購物車
+        showHint: false,
+        fadeOut: false
     }
 
     // 加入購物車
@@ -74,6 +78,17 @@ class ShopHomepage extends Component {
             // cartItems: [...prevState.cartItems, productWithSize]
             cartItems: dataToRender
         });
+
+        // 商品加入購物車提示
+        this.setState({ showHint: true, fadeOut: false });
+
+        setTimeout(() => {
+          this.setState({ fadeOut: true });
+        }, 1000);
+    
+        setTimeout(() => {
+          this.setState({ showHint: false, fadeOut: false });
+        }, 3000);
     }
 
     // 輪播圖開始
@@ -578,7 +593,11 @@ class ShopHomepage extends Component {
                         })}
                     </div>
                 </div>
-
+                {this.state.showHint && (
+                <div className={`addHint ${this.state.fadeOut ? 'fadeOut' : ''}`}>
+                    <span>商品已加入購物車</span>
+                </div>
+                )}
                 <Footer />
             </div>
         );

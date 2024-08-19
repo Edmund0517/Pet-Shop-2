@@ -32,7 +32,11 @@ class Food extends Component {
     // 價格條
     minPrice: 0,
     maxPrice: 1000,
-    step: 100
+    step: 100,
+
+    // 提示加入購物車
+    showHint: false,
+    fadeOut: false
   }
 
   componentDidMount = async () => {
@@ -251,6 +255,17 @@ class Food extends Component {
       // cartItems: [...prevState.cartItems, productWithSize]
       cartItems: dataToRender
     });
+
+    // 商品加入購物車提示
+    this.setState({ showHint: true, fadeOut: false });
+
+    setTimeout(() => {
+      this.setState({ fadeOut: true });
+    }, 1000);
+
+    setTimeout(() => {
+      this.setState({ showHint: false, fadeOut: false });
+    }, 3000);
   }
 
   // 載入購物車資料
@@ -439,7 +454,7 @@ class Food extends Component {
               <div className="filterNothing">
                 <span>無符合篩選條件的商品</span>
               </div>
-              
+
             )}
             {this.state.foodProducts.map(product => {
               const isFavorited = this.state.favoriteProducts[product.shid] || false;
@@ -508,6 +523,11 @@ class Food extends Component {
           </div>
           {/* </div> */}
         </div>
+        {this.state.showHint && (
+          <div className={`addHint ${this.state.fadeOut ? 'fadeOut' : ''}`}>
+            <span>商品已加入購物車</span>
+          </div>
+        )}
         <Footer />
       </>
     );

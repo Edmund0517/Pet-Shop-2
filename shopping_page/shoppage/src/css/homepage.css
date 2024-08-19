@@ -7,7 +7,7 @@ body {
     /* background-image: url("../image/bgImage.png"); */
     background-repeat: round;
     font-family: "all-text", Arial, sans-serif;
-	scroll-behavior: smooth;
+    scroll-behavior: smooth;
     background-color: rgb(222, 243, 247);
 }
 
@@ -25,11 +25,12 @@ body {
     font-size: 40px;
     font-weight: 700;
     color: white;
-    background: linear-gradient(135deg, rgba(86, 93, 95, 0.5) 22%, rgb(0, 137, 167, 0.7) 72%);
-    border-radius: 100%;
-    background-size: 1600% 1600%;
-    animation: change-radius 10s ease-in-out infinite alternate,
-        change-position 5s linear infinite alternate;
+    background-color: rgb(0, 137, 167);
+    /* background: linear-gradient(135deg, rgba(86, 93, 95, 0.5) 22%, rgb(0, 137, 167, 0.7) 72%); */
+    /* border-radius: 100%; */
+    /* background-size: 1600% 1600%; */
+    /* animation: change-radius 10s ease-in-out infinite alternate,
+        change-position 5s linear infinite alternate; */
 }
 
 .titleName {
@@ -96,8 +97,9 @@ body {
 #productCategory ul {
     position: relative;
     padding-left: 0;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    padding: 0;
+    /* padding-top: 2%;
+    padding-bottom: 2%; */
     /* background-color: white; */
     /* top: -20px; */
     /* border-radius: 0px 0px 50px 50px; */
@@ -115,13 +117,13 @@ body {
 #productCategory ul li {
     position: relative;
     display: flex;
-    width: 40%;
+    width: 50%;
     height: 200px;
     list-style-type: none;
     /* background-color: lightgoldenrodyellow; */
     align-items: center;
     justify-content: center;
-    margin: 10px;
+    /* margin: 10px; */
 
     /* 動畫 */
     transform-style: preserve-3d;
@@ -129,44 +131,51 @@ body {
 }
 
 #productCategory ul li:nth-child(1) {
-    border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%;
+    /* border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%; */
     /* border: 5px solid transparent; */
     overflow: hidden;
 
 }
 
 #productCategory ul li:nth-child(2) {
-    border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%;
+    /* border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%; */
     /* border: 5px solid transparent; */
     overflow: hidden;
 
 }
 
 #productCategory ul li:nth-child(3) {
-    border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%;
+    /* border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%; */
     /* border: 5px solid transparent; */
     overflow: hidden;
 
 }
 
 #productCategory ul li:nth-child(4) {
-    border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%;
+    /* border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%; */
     /* border: 5px solid transparent; */
     overflow: hidden;
 
 }
 
 #productCategory ul li:nth-child(1) a img {
-    border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%;
+    /* border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%; */
+    /* border-bottom: 5px solid transparent; */
+    /* border-right: 5px solid transparent; */
 }
+
 #productCategory ul li:nth-child(2) a img {
-    border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%;
+    /* border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%; */
+    /* border-bottom: 5px solid transparent; */
 }
+
 #productCategory ul li:nth-child(3) a img {
-    border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%;
+    /* border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%; */
+    /* border-right: 5px solid transparent; */
 }
+
 #productCategory ul li:nth-child(4) a img {
-    border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%;
+    /* border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%; */
 }
 
 #productCategory ul li a {
@@ -218,7 +227,6 @@ body {
     /* clip-path: circle(50% at 50% 50%); */
     object-fit: cover;
     /* border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%; */
-    border: 5px solid transparent;
     overflow: hidden;
 
 
@@ -481,9 +489,12 @@ body {
     background-size: 110%;
     background-position: center;
     height: 100px;
-    justify-content: center; /* 水平居中 */
-    align-items: center; /* 垂直居中 */
-    position: relative; /* 為絕對定位的子元素提供參考 */
+    justify-content: center;
+    /* 水平居中 */
+    align-items: center;
+    /* 垂直居中 */
+    position: relative;
+    /* 為絕對定位的子元素提供參考 */
 }
 
 .brandSaleBlock span {
@@ -491,7 +502,7 @@ body {
 }
 
 .brandSaleBlock span:first-child {
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
 
 }
 
@@ -501,9 +512,11 @@ body {
     animation-iteration-count: infinite;
     animation-delay: 0.4s;
     transform-origin: left center;
-    position: absolute; /* 絕對定位，使其不影響 "品牌" 的位置 */
-    left: 50%; /* 將其左邊緣置於中心 */
-    transform: translateX(-50%); 
+    position: absolute;
+    /* 絕對定位，使其不影響 "品牌" 的位置 */
+    left: 50%;
+    /* 將其左邊緣置於中心 */
+    transform: translateX(-50%);
     background-image: url('https://pc3mag.com/wp-content/uploads/2022/01/GIF_New-Year-Sparkle-Sticker-By-Charlotte-Mei.gif');
     background-size: fill;
     background-position: center;
@@ -511,17 +524,21 @@ body {
 }
 
 @keyframes typing {
-    0%, 100% {
+
+    0%,
+    100% {
         color: white;
         transform: scale(1);
     }
+
     50% {
         color: red;
         transform: scale(1.5);
         /* text-shadow: 5px 1px 8px rgb(248, 245, 50); */
     }
+
     to {
-        opacity: 1;        
+        opacity: 1;
     }
 
 }
@@ -795,5 +812,21 @@ input[type=number] {
     /* Color of the scrollbar thumb on hover */
 }
 
+/* 加入購物車提示 */
+.addHint {
+    position: fixed;
+    bottom: 100px;
+    right: 0;
+    z-index: 99;
+
+    background-color: white;
+    padding: 30px 30px;
+    /* 動畫 */
+    opacity: 1;
+    transition: opacity 2s ease-out;
+}
 
 
+.addHint.fadeOut {
+    opacity: 0;
+}
