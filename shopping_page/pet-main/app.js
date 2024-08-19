@@ -6,7 +6,7 @@ var app = express();
 const router = express.Router();
 //測試0805
 const shopRoute = require("./route/shopRoute0811"); //後面放shop路徑
-const productRoute = require("./route/productRoute"); //後面放shop路徑
+const productRoute = require("./route/productRoute0818"); //後面放shop路徑
 // const healthRoute = require("./route/healthRoute"); //後面放healthRoute路徑
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); //express使用ejs作為模板引擎

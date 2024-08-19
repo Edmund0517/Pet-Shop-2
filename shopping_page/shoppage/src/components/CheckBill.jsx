@@ -11,16 +11,16 @@ class CheckBill extends Component {
         selectedDeliveryOption: null,
         selectedPaymentOption: null,
 
-        buyerName: '',
-        buyerPhone: '',
-        buyerEmail: '',
+        buyerName: '吳康人',
+        buyerPhone: '0912345678',
+        buyerEmail: 'kangren_wu@actor.com',
         receiverName: '',
         receiverPhone: '',
         receiverAddress: '',
         errors: {
-            buyerName: '欄位不能空白',
-            buyerPhone: '欄位不能空白',
-            buyerEmail: '欄位不能空白',
+            buyerName: '',
+            buyerPhone: '',
+            buyerEmail: '',
             receiverName: '欄位不能空白',
             receiverPhone: '欄位不能空白',
             receiverAddress: '欄位不能空白',
@@ -33,6 +33,7 @@ class CheckBill extends Component {
     componentDidMount = () => {
         // 載入購物車資料
         this.loadCartItems();
+        // this.handleInputChange(e);
     }
 
     // 載入購物車資料的function

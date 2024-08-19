@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../css/category_page.css';
 import ShoppingCart from './ShoppingCart';
 import Footer from './Footer';
+// import ErrorBoundary from './ErrorBoundary';
 
 class Food extends Component {
   state = {
@@ -20,25 +21,25 @@ class Food extends Component {
     cartItems: [],
 
 
-    tags: [],
 
+    // filter
     brandFilterItems: [],
     tagFilterItems: [],
 
-    filterBrandItems: {
-      // dog: false,
-    },
-    filterTagItems: {
-      // dog: false,
-    }
+    filterBrandItems: {},
+    filterTagItems: {},
+
+    // 價格條
+    minPrice: 0,
+    maxPrice: 1000,
+    step: 100
   }
 
   componentDidMount = async () => {
     // 載入商品區
     await this.loadFoodProducts();
-    await this.loadFilterItems();
-
     // 載入filter區
+    await this.loadFilterItems();
   }
 
   loadFoodProducts = async () => {
@@ -62,6 +63,7 @@ class Food extends Component {
     this.setState(newState);
   }
 
+  // 載入filter
   loadFilterItems = async () => {
     var result = await axios.get('http://localhost:8000/shop/products');
     var newState = { ...this.state };
@@ -105,19 +107,6 @@ class Food extends Component {
     console.log(newState.filterBrandItems);
     console.log(newState.filterTagItems);
     this.setState(newState);
-
-
-
-
-    // var filterData = result.data.tags.map((Item, index) => {
-    //   return (
-    //     {
-    //       tag,
-    //     }
-    //   )
-    // });
-    // newState.foodProducts = pData;
-    // this.setState(newState);
   }
 
   handleFilterChange = async (filterId, type) => {
@@ -144,9 +133,6 @@ class Food extends Component {
     const selectedTags = Object.keys(this.state.filterTagItems)
       .filter(key => this.state.filterTagItems[key])
       .map(String);
-
-    console.log(typeof selectedBrands[0]);
-
 
     const dataToServer = {
       'brands': selectedBrands,
@@ -178,27 +164,6 @@ class Food extends Component {
     } catch (error) {
       console.error('Error filtering products:', error);
     }
-  };
-
-  fetchFilteredProducts = async (dataToServer) => {
-    // try {
-    const response = await axios.post('http://localhost:8000/shop/products/filter',
-      JSON.stringify(dataToServer),
-      {
-        headers: {
-          "content-type": "application/json"
-        }
-      },
-    );
-
-    // if (!response.ok) {
-    //   throw new Error('Network response was not ok');
-    // }
-    console.log(response.data);
-    this.setState({ foodProducts: response.data });
-    // } catch (error) {
-    //   console.error('Error fetching filtered products:', error);
-    // }
   };
 
   // 收藏按鈕
@@ -363,8 +328,24 @@ class Food extends Component {
     await this.loadCartItems();
   }
 
+  // 價格進度條
+  handleMinChange = (e) => {
+    const value = Number(e.target.value);
+    if (value <= this.state.maxPrice) {
+      this.setState({ minPrice: value });
+    }
+  }
+
+  handleMaxChange = (e) => {
+    const value = Number(e.target.value);
+    if (value >= this.state.minPrice) {
+      this.setState({ maxPrice: value });
+    }
+  }
+
   render() {
-    // const filteredProducts = this.filterProducts();
+    const { minPrice, maxPrice, step } = this.state;
+    const percentage = (value) => ((value / 1000) * 100).toFixed(0) + '%';
     return (
       <>
         <ShoppingCart
@@ -382,11 +363,42 @@ class Food extends Component {
             </div>
             <div className="filter">
               <p className="filterTitle">價格搜尋</p>
-              <div className="priceFilter">
+              <div className="price-range-container">
+                <div className="price-display">
+                  <span>${minPrice}</span>
+                  <span>${maxPrice}</span>
+                </div>
+                <div className="range-slider">
+                  <div
+                    className="range-selected"
+                    style={{
+                      left: percentage(minPrice),
+                      width: percentage(maxPrice - minPrice)
+                    }}
+                  ></div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1000"
+                    step={step}
+                    value={minPrice}
+                    onChange={this.handleMinChange}
+                  />
+                  <input
+                    type="range"
+                    min="0"
+                    max="1000"
+                    step={step}
+                    value={maxPrice}
+                    onChange={this.handleMaxChange}
+                  />
+                </div>
+              </div>
+              {/* <div className="priceFilter">
                 <span>$0</span> － <span>$5000</span>
               </div>
               <input type="range" className="" min="0" max="5000" step="100"
-                aria-valuetext="2400 - 2600" aria-label="最低價" value="5000" />
+                aria-valuetext="2400 - 2600" aria-label="最低價" value="5000" /> */}
               <p className="filterTitle">篩選條件</p>
               <ul>
                 {this.state.brandFilterItems.map((brandItem) => {
@@ -423,6 +435,12 @@ class Food extends Component {
           {/* <!-- 商品區 --> */}
           {/* <div className="pBlock"> */}
           <div className="pBlock bestsellerProduct" >
+            {(!this.state.foodProducts.length) && (
+              <div className="filterNothing">
+                <span>無符合篩選條件的商品</span>
+              </div>
+              
+            )}
             {this.state.foodProducts.map(product => {
               const isFavorited = this.state.favoriteProducts[product.shid] || false;
               const quantity = this.state.quantities[product.shid] || 1;
